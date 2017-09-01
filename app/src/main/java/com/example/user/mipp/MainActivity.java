@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.user.mipp.Conexao.Connection;
+import com.example.user.mipp.Modelo.Produto;
 import com.example.user.mipp.Modelo.Tela;
 
 import java.util.ArrayList;
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
                     | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
         }
     };
+
     private View mControlsView;
     private final Runnable mShowPart2Runnable = new Runnable() {
         @Override
@@ -78,6 +80,13 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView imageView = (ImageView) findViewById(R.id.animation);
         imageView.setBackgroundResource(R.drawable.animation);
+
 
         AnimationDrawable animation =(AnimationDrawable) imageView.getBackground();
         animation.start();
@@ -97,7 +107,8 @@ public class MainActivity extends AppCompatActivity {
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.codigo1);
 
-        carregaProdutos();
+
+
 
         // Set up the user interaction to manually show or hide the system UI.
         mContentView.setOnClickListener(new View.OnClickListener() {
@@ -110,8 +121,10 @@ public class MainActivity extends AppCompatActivity {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-
+        carregaProdutos();
     }
+
+
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -165,35 +178,21 @@ public class MainActivity extends AppCompatActivity {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
-    int jTime = 0 ;
-    int xtime = jTime;
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if(jTime!= xtime){
-            try {
-                wait(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            xtime = jTime;
-        }
-
-    }
 
 
+
+    int jTime = 0;
     public void carregaProdutos() {
         try {
 
             Connection CLP = new Connection();
             ArrayList<Tela> telas = (ArrayList<Tela>) CLP.execute(1, 3).get();
 
-            for (jTime = 0; jTime < telas.size(); jTime++) {
+            for (jTime = 0; jTime <= telas.size(); jTime++) {
 
-                int tempo = 4000; //telas.get(j).getTimer();
+                int tempo = 3000; //telas.get(j).getTimer();
 
 
-                onPause();
 
                 for (int i = 1; i < telas.get(jTime).produtos.size(); i++) {
 
@@ -215,8 +214,9 @@ public class MainActivity extends AppCompatActivity {
                     textViewpeso.setText("R$ " + preco);
 
 
-
                 }
+                break;
+
             }
 
         } catch (Exception e) {
