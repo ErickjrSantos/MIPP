@@ -1,0 +1,49 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradepadaria"
+    tools:context="com.example.user.mipp.MainActivity">
+
+
+
+    <include layout="@layout/tabeladepreco" />
+    <include layout="@layout/tabeladeprecodescricao" />
+    <include layout="@layout/tabeladeprecovalor" />
+
+
+
+
+    <!-- This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows. -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+
+
+        <LinearLayout
+            android:id="@+id/fullscreen_content_controls"
+            style="?metaButtonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
+
+        </LinearLayout>
+
+
+
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/animation"
+        android:layout_width="750px"
+        android:layout_height="match_parent"
+        android:layout_marginTop="76px"
+        />
+
+</FrameLayout>

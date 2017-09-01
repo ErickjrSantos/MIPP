@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="descricao_all">40px</dimen>
+    <dimen name="descricaomargemtop_all">152px</dimen>
+    <dimen name="descricaomargemleft_codigo">780px</dimen>
+    <dimen name="descricaomargemleft_descricao">960px</dimen>
+    <dimen name="descricaomargemleft_valor">1700px</dimen>
+</resources>
