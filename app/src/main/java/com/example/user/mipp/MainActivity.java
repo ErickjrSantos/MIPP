@@ -2,6 +2,7 @@ package com.example.user.mipp;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.AnimationDrawable;
+import android.os.CountDownTimer;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.user.mipp.Conexao.Connection;
 import com.example.user.mipp.Modelo.Produto;
@@ -110,6 +112,15 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
+
+
+
+
+
+
+
         // Set up the user interaction to manually show or hide the system UI.
         mContentView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,46 +193,96 @@ public class MainActivity extends AppCompatActivity {
 
 
     int jTime = 0;
+    boolean vTest = false;
     public void carregaProdutos() {
-        try {
 
-            Connection CLP = new Connection();
-            ArrayList<Tela> telas = (ArrayList<Tela>) CLP.execute(1, 3).get();
+        new CountDownTimer(2000, 1000) {
+           TextView mview = (TextView) findViewById(R.id.descricao1);
+            TextView mview2= (TextView) findViewById(R.id.codigo2);
+            public void onTick(long millisUntilFinished) {
+                //mview.setText("seconds remaining: " + millisUntilFinished / 1000);
+                if (vTest==false) {
+                    for (int i = 1; i < 18; i++) {
 
-            for (jTime = 0; jTime <= telas.size(); jTime++) {
+                        int textcodigo = getResources().getIdentifier("codigo" + (i), "id", getPackageName());//R.id.codigo1
+                        TextView textViewcodigo = (TextView) findViewById(textcodigo);
+                        String cod = "";
+                        textViewcodigo.setText(cod);
 
-                int tempo = 3000; //telas.get(j).getTimer();
+                        int textdescri = getResources().getIdentifier("descricao" + (i), "id", getPackageName());
+                        TextView textView = (TextView) findViewById(textdescri);
+                        String descricao = "";
+                        textView.setText(descricao);
 
-
-
-                for (int i = 1; i < telas.get(jTime).produtos.size(); i++) {
-
-
-                    int textcodigo = getResources().getIdentifier("codigo" + (i), "id", getPackageName());//R.id.codigo1
-                    TextView textViewcodigo = (TextView) findViewById(textcodigo);
-                    String cod = telas.get(jTime).produtos.get(i).getCod();
-                    textViewcodigo.setText(cod);
-
-
-                    int textdescri = getResources().getIdentifier("descricao" + (i), "id", getPackageName());
-                    TextView textView = (TextView) findViewById(textdescri);
-                    String descricao = telas.get(jTime).produtos.get(i).getNomeProduto();
-                    textView.setText(descricao);
-
-                    int textpeso = getResources().getIdentifier("peso" + (i), "id", getPackageName());
-                    TextView textViewpeso = (TextView) findViewById(textpeso);
-                    String preco = telas.get(jTime).produtos.get(i).getPreco();
-                    textViewpeso.setText("R$ " + preco);
-
-
+                        int textpeso = getResources().getIdentifier("peso" + (i), "id", getPackageName());
+                        TextView textViewpeso = (TextView) findViewById(textpeso);
+                        String preco = "";
+                        textViewpeso.setText(preco);
+                        vTest=true;
+                    }
                 }
-                break;
 
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            public void onFinish() {
+                try {
+
+                    Connection CLP = new Connection();
+                    ArrayList<Tela> telas = (ArrayList<Tela>) CLP.execute(1,3).get();
+
+                    //for (jTime = 0; jTime <= telas.size(); jTime++) {
+                    if(jTime < telas.size()){
+                        int qtdProd = telas.get(jTime).produtos.size();
+                        for (int i = 0; i < qtdProd; i++) {
+
+                            int textcodigo = getResources().getIdentifier("codigo" + (i+1), "id", getPackageName());//R.id.codigo1
+                            TextView textViewcodigo = (TextView) findViewById(textcodigo);
+                            String cod = telas.get(jTime).produtos.get(i).getCod();
+                            textViewcodigo.setText(cod);
+
+                            int textdescri = getResources().getIdentifier("descricao" + (i+1), "id", getPackageName());
+                            TextView textView = (TextView) findViewById(textdescri);
+                            String descricao = telas.get(jTime).produtos.get(i).getNomeProduto();
+                            textView.setText(descricao);
+
+                            int textpeso = getResources().getIdentifier("peso" + (i+1), "id", getPackageName());
+                            TextView textViewpeso = (TextView) findViewById(textpeso);
+                            String preco = telas.get(jTime).produtos.get(i).getPreco();
+                            textViewpeso.setText("R$ " + preco);
+
+                        }
+                            for (int i = qtdProd+1; i < 17; i++) {
+
+                                int textcodigo = getResources().getIdentifier("codigo" + (i+1), "id", getPackageName());//R.id.codigo1
+                                TextView textViewcodigo = (TextView) findViewById(textcodigo);
+                                String cod = "";
+                                textViewcodigo.setText(cod);
+
+                                int textdescri = getResources().getIdentifier("descricao" + (i+1), "id", getPackageName());
+                                TextView textView = (TextView) findViewById(textdescri);
+                                String descricao = "";
+                                textView.setText(descricao);
+
+                                int textpeso = getResources().getIdentifier("peso" + (i+1), "id", getPackageName());
+                                TextView textViewpeso = (TextView) findViewById(textpeso);
+                                String preco = "";
+                                textViewpeso.setText(preco);
+                            }
+                        jTime ++;
+
+                    }else {
+                        jTime=0;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(MainActivity.this, "" + e.getMessage().toString(), Toast.LENGTH_LONG).show();
+                }
+
+                carregaProdutos();
+            }
+        }.start();
+
+
 
 
     }
