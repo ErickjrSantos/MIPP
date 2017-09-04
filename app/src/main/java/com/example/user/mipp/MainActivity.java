@@ -7,16 +7,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.user.mipp.Conexao.Connection;
-import com.example.user.mipp.Modelo.Produto;
 import com.example.user.mipp.Modelo.Tela;
-
 import java.util.ArrayList;
 
 
@@ -110,17 +106,6 @@ public class MainActivity extends AppCompatActivity {
         mContentView = findViewById(R.id.codigo1);
 
 
-
-
-
-
-
-
-
-
-
-
-
         // Set up the user interaction to manually show or hide the system UI.
         mContentView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -194,11 +179,13 @@ public class MainActivity extends AppCompatActivity {
 
     int jTime = 0;
     boolean vTest = false;
+
+
     public void carregaProdutos() {
 
-        new CountDownTimer(2000, 1000) {
-           TextView mview = (TextView) findViewById(R.id.descricao1);
-            TextView mview2= (TextView) findViewById(R.id.codigo2);
+
+        new CountDownTimer(9000, 1000) {
+
             public void onTick(long millisUntilFinished) {
                 //mview.setText("seconds remaining: " + millisUntilFinished / 1000);
                 if (vTest==false) {
