@@ -15,6 +15,8 @@ import com.example.user.mipp.Conexao.Connection;
 import com.example.user.mipp.Modelo.Tela;
 import java.util.ArrayList;
 
+import static com.example.user.mipp.R.drawable.gradepadaria;
+
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -23,7 +25,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     /**
      * Whether or not the system UI should be auto-hidden after
-     * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
+     * {@link #timer} milliseconds.
      */
     private static final boolean AUTO_HIDE = true;
 
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
      * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
      * user interaction before hiding the system UI.
      */
-    private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
+    private static int timer = 4000;
 
     /**
      * Some older devices needs a small delay between UI widget updates
@@ -88,12 +90,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
         ImageView imageView = (ImageView) findViewById(R.id.animation);
         imageView.setBackgroundResource(R.drawable.animation);
-
 
         AnimationDrawable animation =(AnimationDrawable) imageView.getBackground();
         animation.start();
@@ -118,6 +118,8 @@ public class MainActivity extends AppCompatActivity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         carregaProdutos();
+
+
     }
 
 
@@ -184,10 +186,11 @@ public class MainActivity extends AppCompatActivity {
     public void carregaProdutos() {
 
 
-        new CountDownTimer(9000, 1000) {
+        new CountDownTimer(timer, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                //mview.setText("seconds remaining: " + millisUntilFinished / 1000);
+
+
                 if (vTest==false) {
                     for (int i = 1; i < 18; i++) {
 
@@ -217,9 +220,15 @@ public class MainActivity extends AppCompatActivity {
                     Connection CLP = new Connection();
                     ArrayList<Tela> telas = (ArrayList<Tela>) CLP.execute(1,3).get();
 
-                    //for (jTime = 0; jTime <= telas.size(); jTime++) {
                     if(jTime < telas.size()){
                         int qtdProd = telas.get(jTime).produtos.size();
+
+                        ImageView fundo = (ImageView) findViewById(R.id.fundo);
+
+
+
+
+
                         for (int i = 0; i < qtdProd; i++) {
 
                             int textcodigo = getResources().getIdentifier("codigo" + (i+1), "id", getPackageName());//R.id.codigo1
@@ -236,6 +245,7 @@ public class MainActivity extends AppCompatActivity {
                             TextView textViewpeso = (TextView) findViewById(textpeso);
                             String preco = telas.get(jTime).produtos.get(i).getPreco();
                             textViewpeso.setText("R$ " + preco);
+
 
                         }
                             for (int i = qtdProd+1; i < 17; i++) {
@@ -256,6 +266,7 @@ public class MainActivity extends AppCompatActivity {
                                 textViewpeso.setText(preco);
                             }
                         jTime ++;
+
 
                     }else {
                         jTime=0;

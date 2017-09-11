@@ -23,7 +23,7 @@ public class Connection extends AsyncTask {
 
     String url = "http://187.35.128.157:70/MIPP/buscarTelas.php";
     public ArrayList<Produto> produtos = new ArrayList<>();
-    public ArrayList<Tela>telas = new ArrayList<>();
+    public ArrayList<Tela> telas = new ArrayList<>();
 
 
     @Override
