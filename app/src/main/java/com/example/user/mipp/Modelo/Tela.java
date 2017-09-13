@@ -1,5 +1,11 @@
 package com.example.user.mipp.Modelo;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.util.Base64;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -11,14 +17,21 @@ public class Tela implements Serializable {
     int codigo;
     String unidade;
     int timer;
-    int qtdProdutos;
-    public ArrayList<Produto> produtos = new ArrayList<>(1);
+    String imagem;
+    ArrayList<Produto> produtos = new ArrayList<>();
+
+    public Tela(int codigo, int timer, String imagem) {
+        setCodigo(codigo);
+        setTimer(timer);
+        setImagem(imagem);
+
+    }
 
     public int getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    private void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 
@@ -26,7 +39,7 @@ public class Tela implements Serializable {
         return unidade;
     }
 
-    public void setUnidade(String unidade) {
+    private void setUnidade(String unidade) {
         this.unidade = unidade;
     }
 
@@ -34,16 +47,22 @@ public class Tela implements Serializable {
         return timer;
     }
 
-    public void setTimer(int timer) {
+    private void setTimer(int timer) {
         this.timer = timer;
     }
 
     public int getQtdProdutos() {
-        return qtdProdutos;
+        return produtos.size();
     }
 
-    public void setQtdProdutos(int qtdProdutos) {
-        this.qtdProdutos = qtdProdutos;
-    }
+    private void setImagem(String imagem) { this.imagem = imagem; }
+
+    public Drawable getImagem() {
+        return Save.decode(imagem);}
+
+    public void addProduto(Produto produto){ produtos.add(produto); }
+
+    public ArrayList<Produto> getProdutos(){ return produtos; }
+
 
 }

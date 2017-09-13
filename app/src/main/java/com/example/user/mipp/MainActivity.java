@@ -1,21 +1,30 @@
 package com.example.user.mipp;
 
 import android.annotation.SuppressLint;
+import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.CountDownTimer;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.user.mipp.Conexao.Connection;
+import com.example.user.mipp.Modelo.Save;
 import com.example.user.mipp.Modelo.Tela;
-import java.util.ArrayList;
 
-import static com.example.user.mipp.R.drawable.gradepadaria;
+import org.w3c.dom.Text;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -28,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
      * {@link #timer} milliseconds.
      */
     private static final boolean AUTO_HIDE = true;
+    private static int loja;
+    private static int departamento;
+
 
     /**
      * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
@@ -92,14 +104,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageView imageView = (ImageView) findViewById(R.id.animation);
-        imageView.setBackgroundResource(R.drawable.animation);
-
-        AnimationDrawable animation =(AnimationDrawable) imageView.getBackground();
-        animation.start();
-        animation.setEnterFadeDuration(1000);
-        animation.setExitFadeDuration(1000);
-
 
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
@@ -114,10 +118,61 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        loja = 1;
+        departamento = 5;
+
+        TextView txtSetor = (TextView) findViewById(R.id.nomeSetor);
+        switch (departamento){
+            case 1:
+                txtSetor.setText(getResources().getString(R.string.setor1));
+                break;
+            case 2:
+                txtSetor.setText(getResources().getString(R.string.setor2));
+                break;
+            case 3:
+                txtSetor.setText(getResources().getString(R.string.setor3));
+                break;
+            case 4:
+                txtSetor.setText(getResources().getString(R.string.setor4));
+                break;
+            case 5:
+                txtSetor.setText(getResources().getString(R.string.setor5));
+                break;
+            case 6:
+                txtSetor.setText(getResources().getString(R.string.setor6));
+                break;
+            case 7:
+                txtSetor.setText(getResources().getString(R.string.setor7));
+                break;
+            case 8:
+                txtSetor.setText(getResources().getString(R.string.setor8));
+                break;
+        }
+
+        try {
+            Typeface typeFace = Typeface.createFromAsset(getAssets(), "fonts/Futura Std Medium.otf");
+            txtSetor.setTypeface(typeFace);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
+        Connection CLP = new Connection();
+        try {
+            CLP.execute(loja,departamento).get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        FrameLayout fundo = (FrameLayout) findViewById(R.id.fundo);
+        Drawable img = Save.getInstance().getGrade();
+        fundo.setBackground(img);
+
         carregaProdutos();
+
+
 
 
     }
@@ -186,12 +241,12 @@ public class MainActivity extends AppCompatActivity {
     public void carregaProdutos() {
 
 
-        new CountDownTimer(timer, 1000) {
+        new CountDownTimer(timer, 10) {
 
             public void onTick(long millisUntilFinished) {
 
 
-                if (vTest==false) {
+                if (!vTest) {
                     for (int i = 1; i < 18; i++) {
 
                         int textcodigo = getResources().getIdentifier("codigo" + (i), "id", getPackageName());//R.id.codigo1
@@ -218,62 +273,69 @@ public class MainActivity extends AppCompatActivity {
                 try {
 
                     Connection CLP = new Connection();
-                    ArrayList<Tela> telas = (ArrayList<Tela>) CLP.execute(1,3).get();
+                    ArrayList<Tela> telas = (ArrayList<Tela>) CLP.execute(loja,departamento).get();
 
-                    if(jTime < telas.size()){
-                        int qtdProd = telas.get(jTime).produtos.size();
-
-                        ImageView fundo = (ImageView) findViewById(R.id.fundo);
-
-
-
-
-
-                        for (int i = 0; i < qtdProd; i++) {
-
-                            int textcodigo = getResources().getIdentifier("codigo" + (i+1), "id", getPackageName());//R.id.codigo1
-                            TextView textViewcodigo = (TextView) findViewById(textcodigo);
-                            String cod = telas.get(jTime).produtos.get(i).getCod();
-                            textViewcodigo.setText(cod);
-
-                            int textdescri = getResources().getIdentifier("descricao" + (i+1), "id", getPackageName());
-                            TextView textView = (TextView) findViewById(textdescri);
-                            String descricao = telas.get(jTime).produtos.get(i).getNomeProduto();
-                            textView.setText(descricao);
-
-                            int textpeso = getResources().getIdentifier("peso" + (i+1), "id", getPackageName());
-                            TextView textViewpeso = (TextView) findViewById(textpeso);
-                            String preco = telas.get(jTime).produtos.get(i).getPreco();
-                            textViewpeso.setText("R$ " + preco);
-
-
-                        }
-                            for (int i = qtdProd+1; i < 17; i++) {
-
-                                int textcodigo = getResources().getIdentifier("codigo" + (i+1), "id", getPackageName());//R.id.codigo1
-                                TextView textViewcodigo = (TextView) findViewById(textcodigo);
-                                String cod = "";
-                                textViewcodigo.setText(cod);
-
-                                int textdescri = getResources().getIdentifier("descricao" + (i+1), "id", getPackageName());
-                                TextView textView = (TextView) findViewById(textdescri);
-                                String descricao = "";
-                                textView.setText(descricao);
-
-                                int textpeso = getResources().getIdentifier("peso" + (i+1), "id", getPackageName());
-                                TextView textViewpeso = (TextView) findViewById(textpeso);
-                                String preco = "";
-                                textViewpeso.setText(preco);
-                            }
-                        jTime ++;
-
-
-                    }else {
+                    if(jTime >= telas.size()){
                         jTime=0;
                     }
+
+                    int qtdProd = telas.get(jTime).getProdutos().size();
+
+                    /*FrameLayout fundo = (FrameLayout) findViewById(R.id.fundo);
+                    Drawable img = telas.get(jTime).getImagem();
+                    fundo.setBackground(img);*/
+                    //Essa grade não muda. Colocar no onCreate()
+                    //Utilizar aqui a imagem interna, do ImageView de ID animation
+                    Drawable img = telas.get(jTime).getImagem();
+                    ImageView animation = (ImageView) findViewById(R.id.animation);
+                    animation.setBackground(img);
+
+                    timer = telas.get(jTime).getTimer();
+                    timer = timer * 1000;
+
+                    for (int i = 0; i < qtdProd; i++) {
+
+                        int textcodigo = getResources().getIdentifier("codigo" + (i+1), "id", getPackageName());//R.id.codigo1
+                        TextView textViewcodigo = (TextView) findViewById(textcodigo);
+                        String cod = telas.get(jTime).getProdutos().get(i).getCod();
+                        textViewcodigo.setText(cod);
+
+                        int textdescri = getResources().getIdentifier("descricao" + (i+1), "id", getPackageName());
+                        TextView textView = (TextView) findViewById(textdescri);
+                        String descricao = telas.get(jTime).getProdutos().get(i).getNomeProduto();
+                        textView.setText(descricao);
+
+                        int textpeso = getResources().getIdentifier("peso" + (i+1), "id", getPackageName());
+                        TextView textViewpeso = (TextView) findViewById(textpeso);
+                        String preco = telas.get(jTime).getProdutos().get(i).getPreco();
+                        preco = preco.replace('.',',');
+                        textViewpeso.setText("R$ " + preco);
+                    }
+
+                    for (int i = qtdProd; i < 17; i++) {
+
+                        int textcodigo = getResources().getIdentifier("codigo" + (i+1), "id", getPackageName());//R.id.codigo1
+                        TextView textViewcodigo = (TextView) findViewById(textcodigo);
+                        String cod = "";
+                        textViewcodigo.setText(cod);
+
+                        int textdescri = getResources().getIdentifier("descricao" + (i+1), "id", getPackageName());
+                        TextView textView = (TextView) findViewById(textdescri);
+                        String descricao = "";
+                        textView.setText(descricao);
+
+                        int textpeso = getResources().getIdentifier("peso" + (i+1), "id", getPackageName());
+                        TextView textViewpeso = (TextView) findViewById(textpeso);
+                        String preco = "";
+                        textViewpeso.setText(preco);
+                    }
+                    if(jTime < telas.size()) {
+                        jTime++;
+                    }
+
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(MainActivity.this, "" + e.getMessage().toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "" + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
 
                 carregaProdutos();

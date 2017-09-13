@@ -3,160 +3,175 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/descricaomargemtop_all"
+        android:layout_height="55px"
         android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:textColor="@color/Preto"
+        android:layout_marginTop="@dimen/descricaomargemtop_all"
         android:text="descricao1"
+        android:textColor="@color/Promocao"
         android:textSize="@dimen/descricao_all"
-        />
-    <TextView
+        android:textStyle="bold" />
+
+    <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="55px"
         android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:textColor="@color/Preto"
         android:text="descricao2"
+        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
-        />
-    <TextView
+        android:textStyle="bold" />
+
+    <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso3"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="55px"
         android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:textColor="@color/Preto"
         android:text="descricao3"
+        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
-        />
-    <TextView
+        android:textStyle="bold" />
+
+    <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso4"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="55px"
         android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:textColor="@color/Preto"
         android:text="descricao4"
+        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
-        />
-    <TextView
+        android:textStyle="bold" />
+
+    <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso5"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="55px"
         android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:textColor="@color/Preto"
         android:text="descricao5"
+        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
-        />
-    <TextView
+        android:textStyle="bold" />
+
+    <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso6"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="55px"
         android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:textColor="@color/Preto"
         android:text="descricao6"
+        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
-        />
-    <TextView
+        android:textStyle="bold" />
+
+    <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso7"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="55px"
         android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:textColor="@color/Preto"
         android:text="descricao7"
+        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
-        />
-    <TextView
+        android:textStyle="bold" />
+
+    <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso8"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="55px"
         android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:textColor="@color/Preto"
         android:text="descricao8"
+        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
-        />
-    <TextView
+        android:textStyle="bold" />
+
+    <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso9"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="55px"
         android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:textColor="@color/Preto"
         android:text="descricao9"
+        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
-        />
-    <TextView
+        android:textStyle="bold" />
+
+    <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso10"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="55px"
         android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:textColor="@color/Preto"
         android:text="descricao10"
+        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
-        />
-    <TextView
+        android:textStyle="bold" />
+
+    <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso11"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="55px"
         android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:textColor="@color/Preto"
         android:text="descricao11"
+        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
-        />
-    <TextView
+        android:textStyle="bold" />
+
+    <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso12"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="55px"
         android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:textColor="@color/Preto"
         android:text="descricao12"
+        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
-        />
+        android:textStyle="bold" />
 
-    <TextView
+    <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso13"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="55px"
         android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:textColor="@color/Preto"
         android:text="descricao13"
+        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
-        />
-    <TextView
+        android:textStyle="bold" />
+
+    <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso14"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="55px"
         android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:textColor="@color/Preto"
         android:text="descricao14"
+        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
-        />
-    <TextView
+        android:textStyle="bold" />
+
+    <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso15"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="55px"
         android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:textColor="@color/Preto"
         android:text="descricao15"
+        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
-        />
-    <TextView
+        android:textStyle="bold" />
+
+    <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso16"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="55px"
         android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:textColor="@color/Preto"
         android:text="descricao16"
+        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
-        />
-    <TextView
+        android:textStyle="bold" />
+
+    <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso17"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="55px"
         android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:textColor="@color/Preto"
         android:text="descricao17"
+        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
-        />
+        android:textStyle="bold" />
 
 </LinearLayout>

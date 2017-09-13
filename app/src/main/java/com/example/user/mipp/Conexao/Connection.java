@@ -1,8 +1,10 @@
 package com.example.user.mipp.Conexao;
 
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 
 import com.example.user.mipp.Modelo.Produto;
+import com.example.user.mipp.Modelo.Save;
 import com.example.user.mipp.Modelo.Tela;
 
 import org.json.JSONArray;
@@ -15,29 +17,26 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-/**
- * Created by user on 01/09/17.
- */
 
 public class Connection extends AsyncTask {
 
-    String url = "http://187.35.128.157:70/MIPP/buscarTelas.php";
-    public ArrayList<Produto> produtos = new ArrayList<>();
-    public ArrayList<Tela> telas = new ArrayList<>();
+    private String url = "http://187.35.128.157:70/MIPP/buscarTelas.php";
+    private ArrayList<Tela> telas = new ArrayList<>();
 
 
     @Override
     protected ArrayList<Tela> doInBackground(Object[] params) {
-
+        int responseCode;
+        int quantProduto, codigo, timer;
+        String imagem;
+        Save save = Save.getInstance();
         try {
-
-
 
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
             con.setRequestMethod("POST");
 
-            StringBuffer response = new StringBuffer();
+            StringBuilder response = new StringBuilder();
 
             //dados POST
             String urlParameters = "codL=" + params[0] + "&codS=" + params[1];
@@ -50,7 +49,7 @@ public class Connection extends AsyncTask {
             wr.close();
 
 
-            int responseCode = con.getResponseCode();
+            responseCode = con.getResponseCode();
             System.out.println("Codigo de resposta: " + responseCode);
 
             BufferedReader in = new BufferedReader(
@@ -64,26 +63,24 @@ public class Connection extends AsyncTask {
             String JsonStr = response.toString();
 
 
-            if (JsonStr != null || JsonStr != "") {
+            if (JsonStr != null) {
                 JSONObject jsonObjt = new JSONObject(JsonStr);
 
                 int quantTelas = jsonObjt.getInt("quantTelas");
 
+                String background = jsonObjt.getString("background");
+                Drawable fundo = Save.decode(background);
+                save.setGrade(fundo);
+
                 JSONArray JArrayTelas = jsonObjt.getJSONArray("telas");
                 for (int x = 0; x < quantTelas; x++) {
-                    Tela tela = new Tela();
-                    int quantProduto = JArrayTelas.getJSONObject(x).getInt("quantProdutos");
-                    int codigo = JArrayTelas.getJSONObject(x).getInt("codigo");
-                    int timer = JArrayTelas.getJSONObject(x).getInt("timer");
+                    quantProduto = JArrayTelas.getJSONObject(x).getInt("quantProdutos");
+                    codigo = JArrayTelas.getJSONObject(x).getInt("codigo");
+                    timer = JArrayTelas.getJSONObject(x).getInt("timer");
+                    imagem = JArrayTelas.getJSONObject(x).getString("imagem");
 
-                    tela.setQtdProdutos(quantProduto);
-                    tela.setCodigo(codigo);
-                    tela.setTimer(timer);
-
-
-
+                    Tela tela = new Tela(codigo, timer, imagem);
                     JSONArray JArrayProduto = JArrayTelas.getJSONObject(x).getJSONArray("produtos");
-
 
                     for (int j = 0; j < quantProduto; j++) {
 
@@ -98,7 +95,7 @@ public class Connection extends AsyncTask {
                         produto.setNomeProduto(nomeProduto);
                         produto.setCod(codB);
 
-                        tela.produtos.add(produto);
+                        tela.addProduto(produto);
 
                     }
                     telas.add(tela);
@@ -110,10 +107,5 @@ public class Connection extends AsyncTask {
             return null;
         }
         return telas;
-    }
-
-    @Override
-    protected void onPostExecute(Object o) {
-        super.onPostExecute(o);
     }
 }

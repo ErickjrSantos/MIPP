@@ -3,10 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/fundo"
-    android:background="@drawable/gradepadaria"
     tools:context="com.example.user.mipp.MainActivity">
 
 
+    <TextView
+        android:id="@+id/nomeSetor"
+        android:layout_width="730px"
+        android:layout_height="100px"
+        android:layout_marginLeft="10px"
+        android:fontFamily="sans-serif-smallcaps"
+        android:textAlignment="viewStart"
+        android:textColor="@android:color/white"
+        android:textSize="60px"
+        android:textStyle="bold" />
 
     <include layout="@layout/tabeladepreco" />
     <include layout="@layout/tabeladeprecodescricao" />
@@ -23,7 +32,6 @@
         android:fitsSystemWindows="true">
 
 
-
         <LinearLayout
             android:id="@+id/fullscreen_content_controls"
             style="?metaButtonBarStyle"
@@ -34,7 +42,6 @@
             tools:ignore="UselessParent">
 
         </LinearLayout>
-
 
 
     </FrameLayout>

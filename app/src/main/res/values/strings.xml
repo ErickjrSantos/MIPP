@@ -4,4 +4,13 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="conteudo">codigo      descricao        R$ preco</string>
+
+    <string name="setor1">GERAL</string>
+    <string name="setor2">HORTIFRUTI</string>
+    <string name="setor3">PADARIA</string>
+    <string name="setor4">AÇOUGUE</string>
+    <string name="setor5">FRIOS</string>
+    <string name="setor6">PREPARAÇÃO</string>
+    <string name="setor7">NOBRE</string>
+    <string name="setor8">ROTISSERIE</string>
 </resources>
