@@ -1,6 +1,7 @@
 package com.example.user.mipp;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
@@ -104,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        loja = getIntent().getExtras().getInt("unidade");
+        departamento = getIntent().getExtras().getInt("departamento");
 
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
@@ -118,8 +121,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        loja = 1;
-        departamento = 5;
+
 
         TextView txtSetor = (TextView) findViewById(R.id.nomeSetor);
         switch (departamento){

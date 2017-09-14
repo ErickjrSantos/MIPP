@@ -11,6 +11,7 @@
         android:layout_height="900px"
         android:gravity="center_vertical|center_horizontal"
         android:orientation="vertical"
+        android:paddingLeft="20px"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
 
@@ -28,7 +29,8 @@
             android:layout_width="match_parent"
             android:layout_height="100px"
             android:layout_marginTop="25px"
-            android:scrollbarSize="@dimen/descricaomargemtop_all" />
+            android:scrollbarSize="@dimen/descricaomargemtop_all"
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/textView2"
@@ -46,7 +48,8 @@
             android:layout_height="100px"
             android:layout_marginTop="25px"
             android:fadeScrollbars="false"
-            android:scrollbarSize="@dimen/descricaomargemtop_all" />
+            android:scrollbarSize="@dimen/descricaomargemtop_all"
+            android:textAlignment="center" />
 
         <Button
             android:id="@+id/btnIniciaMIPP"

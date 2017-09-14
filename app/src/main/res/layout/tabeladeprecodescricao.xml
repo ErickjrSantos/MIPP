@@ -11,7 +11,7 @@
         android:layout_marginTop="@dimen/descricaomargemtop_all"
         android:fontFamily="sans-serif"
         android:text="descricao1"
-        android:textColor="@color/Promocao"
+        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
