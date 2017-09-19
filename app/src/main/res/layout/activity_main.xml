@@ -8,13 +8,13 @@
 
     <TextView
         android:id="@+id/nomeSetor"
-        android:layout_width="730px"
-        android:layout_height="100px"
-        android:layout_marginLeft="10px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="13sp"
         android:fontFamily="sans-serif-smallcaps"
         android:textAlignment="viewStart"
         android:textColor="@android:color/white"
-        android:textSize="60px"
+        android:textSize="40sp"
         android:textStyle="bold" />
 
     <include layout="@layout/tabeladepreco" />
@@ -48,9 +48,9 @@
 
     <ImageView
         android:id="@+id/animation"
-        android:layout_width="750px"
+        android:layout_width="499sp"
         android:layout_height="match_parent"
-        android:layout_marginTop="76px"
+        android:layout_marginTop="51sp"
         />
 
 </FrameLayout>

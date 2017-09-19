@@ -14,9 +14,7 @@ public class Produto implements Serializable {
 
     public boolean isPromocao() {return promocao;}
 
-    public void setPromocao(boolean promocao) {
-        this.promocao = promocao;
-    }
+    public void setPromocao(boolean promocao) {this.promocao = promocao;}
 
     public String getCod() {return cod;}
 

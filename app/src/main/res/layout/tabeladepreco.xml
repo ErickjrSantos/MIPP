@@ -7,7 +7,7 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/codigo1"
         android:layout_width="wrap_content"
-        android:layout_height="55px"
+        android:layout_height="@dimen/entre_todas_descricoes"
         android:layout_marginLeft="@dimen/descricaomargemleft_codigo"
         android:layout_marginTop="@dimen/descricaomargemtop_all"
         android:text="descricao1"
@@ -18,7 +18,7 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/codigo2"
         android:layout_width="wrap_content"
-        android:layout_height="55px"
+        android:layout_height="@dimen/entre_todas_descricoes"
         android:layout_marginLeft="@dimen/descricaomargemleft_codigo"
         android:text="descricao2"
         android:textColor="@color/Preto"
@@ -28,7 +28,7 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/codigo3"
         android:layout_width="wrap_content"
-        android:layout_height="55px"
+        android:layout_height="@dimen/entre_todas_descricoes"
         android:layout_marginLeft="@dimen/descricaomargemleft_codigo"
         android:text="descricao3"
         android:textColor="@color/Preto"
@@ -38,7 +38,7 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/codigo4"
         android:layout_width="wrap_content"
-        android:layout_height="55px"
+        android:layout_height="@dimen/entre_todas_descricoes"
         android:layout_marginLeft="@dimen/descricaomargemleft_codigo"
         android:text="descricao4"
         android:textColor="@color/Preto"
@@ -48,7 +48,7 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/codigo5"
         android:layout_width="wrap_content"
-        android:layout_height="55px"
+        android:layout_height="@dimen/entre_todas_descricoes"
         android:layout_marginLeft="@dimen/descricaomargemleft_codigo"
         android:text="descricao5"
         android:textColor="@color/Preto"
@@ -58,7 +58,7 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/codigo6"
         android:layout_width="wrap_content"
-        android:layout_height="55px"
+        android:layout_height="@dimen/entre_todas_descricoes"
         android:layout_marginLeft="@dimen/descricaomargemleft_codigo"
         android:text="descricao6"
         android:textColor="@color/Preto"
@@ -68,7 +68,7 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/codigo7"
         android:layout_width="wrap_content"
-        android:layout_height="55px"
+        android:layout_height="@dimen/entre_todas_descricoes"
         android:layout_marginLeft="@dimen/descricaomargemleft_codigo"
         android:text="descricao7"
         android:textColor="@color/Preto"
@@ -78,7 +78,7 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/codigo8"
         android:layout_width="wrap_content"
-        android:layout_height="55px"
+        android:layout_height="@dimen/entre_todas_descricoes"
         android:layout_marginLeft="@dimen/descricaomargemleft_codigo"
         android:text="descricao8"
         android:textColor="@color/Preto"
@@ -88,7 +88,7 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/codigo9"
         android:layout_width="wrap_content"
-        android:layout_height="55px"
+        android:layout_height="@dimen/entre_todas_descricoes"
         android:layout_marginLeft="@dimen/descricaomargemleft_codigo"
         android:text="descricao9"
         android:textColor="@color/Preto"
@@ -98,7 +98,7 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/codigo10"
         android:layout_width="wrap_content"
-        android:layout_height="55px"
+        android:layout_height="@dimen/entre_todas_descricoes"
         android:layout_marginLeft="@dimen/descricaomargemleft_codigo"
         android:text="descricao10"
         android:textColor="@color/Preto"
@@ -108,7 +108,7 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/codigo11"
         android:layout_width="wrap_content"
-        android:layout_height="55px"
+        android:layout_height="@dimen/entre_todas_descricoes"
         android:layout_marginLeft="@dimen/descricaomargemleft_codigo"
         android:text="descricao11"
         android:textColor="@color/Preto"
@@ -118,7 +118,7 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/codigo12"
         android:layout_width="wrap_content"
-        android:layout_height="55px"
+        android:layout_height="@dimen/entre_todas_descricoes"
         android:layout_marginLeft="@dimen/descricaomargemleft_codigo"
         android:text="descricao12"
         android:textColor="@color/Preto"
@@ -128,7 +128,7 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/codigo13"
         android:layout_width="wrap_content"
-        android:layout_height="55px"
+        android:layout_height="@dimen/entre_todas_descricoes"
         android:layout_marginLeft="@dimen/descricaomargemleft_codigo"
         android:text="descricao13"
         android:textColor="@color/Preto"
@@ -138,7 +138,7 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/codigo14"
         android:layout_width="wrap_content"
-        android:layout_height="55px"
+        android:layout_height="@dimen/entre_todas_descricoes"
         android:layout_marginLeft="@dimen/descricaomargemleft_codigo"
         android:text="descricao14"
         android:textColor="@color/Preto"
@@ -148,7 +148,7 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/codigo15"
         android:layout_width="wrap_content"
-        android:layout_height="55px"
+        android:layout_height="@dimen/entre_todas_descricoes"
         android:layout_marginLeft="@dimen/descricaomargemleft_codigo"
         android:text="descricao15"
         android:textColor="@color/Preto"
@@ -158,7 +158,7 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/codigo16"
         android:layout_width="wrap_content"
-        android:layout_height="55px"
+        android:layout_height="@dimen/entre_todas_descricoes"
         android:layout_marginLeft="@dimen/descricaomargemleft_codigo"
         android:text="descricao16"
         android:textColor="@color/Preto"
@@ -168,7 +168,7 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/codigo17"
         android:layout_width="wrap_content"
-        android:layout_height="55px"
+        android:layout_height="@dimen/entre_todas_descricoes"
         android:layout_marginLeft="@dimen/descricaomargemleft_codigo"
         android:text="descricao17"
         android:textColor="@color/Preto"
