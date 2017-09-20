@@ -10,7 +10,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.example.user.mipp.Conexao.ConnectionIDs;
+import com.example.user.mipp.Conexao.ConnectionUnidades;
+import com.example.user.mipp.Modelo.UnDepto;
+
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -38,24 +43,22 @@ public class MenuActivity extends AppCompatActivity {
             startActivity(goToMIPP);
         }
 
-        ArrayList<String> unidades = new ArrayList<>();
-        ArrayList<String> departamentos = new ArrayList<>();
+        ArrayList<String> unidades;
+        ArrayList<String> departamentos;
 
-        unidades.add(" ");
-        unidades.add("Interlagos");
-        unidades.add("Taboão");
-        unidades.add("Morumbi");
-        unidades.add("Bolonha");
 
-        departamentos.add(" ");
-        departamentos.add("1 - GERAL");
-        departamentos.add("2 - HORTIFRUTI");
-        departamentos.add("3 - PADARIA");
-        departamentos.add("4 - AÇOUGUE");
-        departamentos.add("5 - FRIOS");
-        departamentos.add("6 - PREPARAÇÃO");
-        departamentos.add("7 - NOBRE");
-        departamentos.add("8 - ROTISSERIE");
+        ConnectionUnidades conun = new ConnectionUnidades();
+        UnDepto unDepto = new UnDepto();
+        try {
+            unDepto = (UnDepto) conun.execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        unidades = unDepto.unidade;
+        departamentos = unDepto.departamento;
 
         ArrayAdapter<String> adptUn = new ArrayAdapter<String>(
                 this, R.layout.spinner_mipp, unidades);
@@ -74,23 +77,35 @@ public class MenuActivity extends AppCompatActivity {
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int selectedIndexUn = spUn.getSelectedItemPosition();
-                int selectedIndexDp = spDp.getSelectedItemPosition();
+                String selectedIndexUn = spUn.getSelectedItem().toString();
+                String selectedIndexDp = spDp.getSelectedItem().toString();
+
+                int[] ids = null;
+                ConnectionIDs CID = new ConnectionIDs();
+                try {
+                    ids = (int[]) CID.execute(selectedIndexUn, selectedIndexDp).get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
 
                 SharedPreferences settings = getSharedPreferences(MIPP_PREFERENCES, 0);
                 SharedPreferences.Editor editor = settings.edit();
-                editor.putInt("unidade", selectedIndexUn);
-                editor.putInt("departamento", selectedIndexDp);
+                editor.putInt("unidade", ids[0]);
+                editor.putInt("departamento", ids[1]);
                 editor.commit();
 
                 Intent goToMIPP = new Intent(getApplicationContext(), MainActivity.class);
 
-                goToMIPP.putExtra("unidade",selectedIndexUn);
-                goToMIPP.putExtra("departamento",selectedIndexDp);
+                goToMIPP.putExtra("unidade",ids[0]);
+                goToMIPP.putExtra("departamento",ids[1]);
 
                 startActivity(goToMIPP);
             }
 
         });
     }
+
+
 }
