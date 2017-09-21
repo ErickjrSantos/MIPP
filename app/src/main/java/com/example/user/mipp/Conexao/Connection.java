@@ -31,15 +31,16 @@ public class Connection extends AsyncTask {
         int quantProduto, codigo, timer;
         String imagem;
         Save save = Save.getInstance();
+        String urlParameters = "codL=" + params[0] + "&codS=" + params[1];
 
         try {
 
             HttpURLConnection con;
             if(Save.TestConnection(url) != null){
-                con = Save.TestConnection(url);
+                con = Save.TestConnection(url, urlParameters);
             }else{
                 url = "http://187.35.128.157:70/MIPP/buscaUnidades.php";
-                con = Save.TestConnection(url);
+                con = Save.TestConnection(url, urlParameters);
             }
 
             StringBuilder response = new StringBuilder();

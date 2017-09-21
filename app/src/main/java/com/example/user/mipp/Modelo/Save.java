@@ -45,10 +45,30 @@ public class Save {
         try {
             URL obj = new URL(url);
             con = (HttpURLConnection) obj.openConnection();
+            con.setConnectTimeout(1000);
             con.setRequestMethod("POST");
             con.setDoOutput(true);
 
             DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+            wr.flush();
+            wr.close();
+        }catch (Exception ex){
+            return null;
+        }
+        return con;
+    }
+
+    public static HttpURLConnection TestConnection(String url, String urlParameters){
+        HttpURLConnection con;
+        try {
+            URL obj = new URL(url);
+            con = (HttpURLConnection) obj.openConnection();
+            con.setConnectTimeout(1000);
+            con.setRequestMethod("POST");
+            con.setDoOutput(true);
+
+            DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+            wr.writeBytes(urlParameters);
             wr.flush();
             wr.close();
         }catch (Exception ex){

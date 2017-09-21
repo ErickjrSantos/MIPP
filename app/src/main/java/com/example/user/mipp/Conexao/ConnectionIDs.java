@@ -26,11 +26,12 @@ public class ConnectionIDs extends AsyncTask {
         int[] ids = new int[2];
         try {
             HttpURLConnection con;
+            String urlParameters = "un=" + params[0] + "&depto=" + params[1];
             if(Save.TestConnection(url) != null){
-                con = Save.TestConnection(url);
+                con = Save.TestConnection(url, urlParameters);
             }else{
                 url = "http://187.35.128.157:70/MIPP/buscaUnidades.php";
-                con = Save.TestConnection(url);
+                con = Save.TestConnection(url, urlParameters);
             }
 
             StringBuilder response = new StringBuilder();
