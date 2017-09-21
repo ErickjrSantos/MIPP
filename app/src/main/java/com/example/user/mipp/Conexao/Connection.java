@@ -16,11 +16,12 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.concurrent.TimeoutException;
 
 
 public class Connection extends AsyncTask {
 
-    private String url = "http://187.35.128.157:70/MIPP/buscarTelas.php";
+    private String url = "http://192.168.0.221:70/MIPP/buscarTelas.php";
     private ArrayList<Tela> telas = new ArrayList<>();
 
 
@@ -30,28 +31,18 @@ public class Connection extends AsyncTask {
         int quantProduto, codigo, timer;
         String imagem;
         Save save = Save.getInstance();
+
         try {
 
-            URL obj = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-            con.setRequestMethod("POST");
+            HttpURLConnection con;
+            if(Save.TestConnection(url) != null){
+                con = Save.TestConnection(url);
+            }else{
+                url = "http://187.35.128.157:70/MIPP/buscaUnidades.php";
+                con = Save.TestConnection(url);
+            }
 
             StringBuilder response = new StringBuilder();
-
-            //dados POST
-            String urlParameters = "codL=" + params[0] + "&codS=" + params[1];
-
-            //Cria POST
-            con.setDoOutput(true);
-            DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-            wr.writeBytes(urlParameters);
-            wr.flush();
-            wr.close();
-
-
-            responseCode = con.getResponseCode();
-            System.out.println("Codigo de resposta: " + responseCode);
-
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));
             String inputLine;

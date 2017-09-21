@@ -277,6 +277,27 @@ public class MainActivity extends AppCompatActivity {
                     timer = telas.get(jTime).getTimer();
                     timer = timer * 1000;
 
+//                    if(qtdProd == 0){
+//                        for (int i = qtdProd; i < 17; i++) {
+//
+//                            int textcodigo = getResources().getIdentifier("codigo" + (i+1), "id", getPackageName());//R.id.codigo1
+//                            TextView textViewcodigo = (TextView) findViewById(textcodigo);
+//                            String cod = "";
+//                            textViewcodigo.setText(cod);
+//
+//                            int textdescri = getResources().getIdentifier("descricao" + (i+1), "id", getPackageName());
+//                            TextView textView = (TextView) findViewById(textdescri);
+//                            String descricao = "";
+//                            textView.setText(descricao);
+//
+//                            int textpeso = getResources().getIdentifier("peso" + (i+1), "id", getPackageName());
+//                            TextView textViewpeso = (TextView) findViewById(textpeso);
+//                            String preco = "";
+//                            textViewpeso.setText(preco);
+//                        }
+//
+//                    }
+
                     for (int i = 0; i < qtdProd; i++) {
 
                         int textcodigo = getResources().getIdentifier("codigo" + (i+1), "id", getPackageName());//R.id.codigo1

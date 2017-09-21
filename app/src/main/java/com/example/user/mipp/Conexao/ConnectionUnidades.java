@@ -13,33 +13,36 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.concurrent.TimeoutException;
 
 /**
  * Created by user on 20/09/17.
  */
 
 public class ConnectionUnidades extends AsyncTask{
-    private String url = "http://187.35.128.157:70/MIPP/buscaUnidades.php";
+    private String url = "http://192.168.0.221:70/MIPP/buscaUnidades.php";
 
     @Override
     protected UnDepto doInBackground(Object[] params) {
         UnDepto undepto = new UnDepto();
         try {
-
-            URL obj = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-            con.setRequestMethod("POST");
+            HttpURLConnection con;
+            if(Save.TestConnection(url) != null){
+                con = Save.TestConnection(url);
+            }else{
+                url = "http://187.35.128.157:70/MIPP/buscaUnidades.php";
+                con = Save.TestConnection(url);
+            }
 
             StringBuilder response = new StringBuilder();
-
-            con.setDoOutput(true);
-            DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-            wr.flush();
-            wr.close();
 
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));
@@ -71,5 +74,7 @@ public class ConnectionUnidades extends AsyncTask{
         }
         return undepto;
     }
+
+
 
 }

@@ -2,6 +2,7 @@ package com.example.user.mipp.Conexao;
 
 import android.os.AsyncTask;
 
+import com.example.user.mipp.Modelo.Save;
 import com.example.user.mipp.Modelo.UnDepto;
 
 import org.json.JSONArray;
@@ -18,29 +19,21 @@ import java.net.URL;
  */
 
 public class ConnectionIDs extends AsyncTask {
-    private String url = "http://187.35.128.157:70/MIPP/unDeptoID.php";
+    private String url = "http://192.168.0.221:70/MIPP/unDeptoID.php";
 
     @Override
     protected int[] doInBackground(Object[] params) {
         int[] ids = new int[2];
         try {
-
-            URL obj = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-            con.setRequestMethod("POST");
+            HttpURLConnection con;
+            if(Save.TestConnection(url) != null){
+                con = Save.TestConnection(url);
+            }else{
+                url = "http://187.35.128.157:70/MIPP/buscaUnidades.php";
+                con = Save.TestConnection(url);
+            }
 
             StringBuilder response = new StringBuilder();
-
-            //dados POST
-            String urlParameters = "un=" + params[0] + "&depto=" + params[1];
-
-            //Cria POST
-            con.setDoOutput(true);
-            DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-            wr.writeBytes(urlParameters);
-            wr.flush();
-            wr.close();
-
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));
             String inputLine;

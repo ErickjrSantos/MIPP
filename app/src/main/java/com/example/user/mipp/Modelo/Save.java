@@ -6,6 +6,10 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Base64;
 
+import java.io.DataOutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 
 /**
  * Created by user on 11/09/17.
@@ -34,6 +38,23 @@ public class Save {
         Bitmap decodeByte = BitmapFactory.decodeByteArray(decodeString,0,decodeString.length);
         BitmapDrawable draImg = new BitmapDrawable(decodeByte);
         return draImg;
+    }
+
+    public static HttpURLConnection TestConnection(String url){
+        HttpURLConnection con;
+        try {
+            URL obj = new URL(url);
+            con = (HttpURLConnection) obj.openConnection();
+            con.setRequestMethod("POST");
+            con.setDoOutput(true);
+
+            DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+            wr.flush();
+            wr.close();
+        }catch (Exception ex){
+            return null;
+        }
+        return con;
     }
 
 }
