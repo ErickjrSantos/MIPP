@@ -39,7 +39,7 @@ public class Connection extends AsyncTask {
             if(Save.TestConnection(url) != null){
                 con = Save.TestConnection(url, urlParameters);
             }else{
-                url = "http://187.35.128.157:70/MIPP/buscaUnidades.php";
+                url = "http://187.35.128.157:70/MIPP/buscarTelas.php";
                 con = Save.TestConnection(url, urlParameters);
             }
 

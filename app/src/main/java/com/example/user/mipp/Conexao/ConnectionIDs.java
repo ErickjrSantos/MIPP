@@ -30,7 +30,7 @@ public class ConnectionIDs extends AsyncTask {
             if(Save.TestConnection(url) != null){
                 con = Save.TestConnection(url, urlParameters);
             }else{
-                url = "http://187.35.128.157:70/MIPP/buscaUnidades.php";
+                url = "http://187.35.128.157:70/MIPP/unDeptoID.php";
                 con = Save.TestConnection(url, urlParameters);
             }
 

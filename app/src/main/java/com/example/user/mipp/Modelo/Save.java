@@ -45,7 +45,8 @@ public class Save {
         try {
             URL obj = new URL(url);
             con = (HttpURLConnection) obj.openConnection();
-            con.setConnectTimeout(1000);
+            if(url.substring(7,23).equals("192.168.0.221:70"))
+                con.setConnectTimeout(200);
             con.setRequestMethod("POST");
             con.setDoOutput(true);
 
