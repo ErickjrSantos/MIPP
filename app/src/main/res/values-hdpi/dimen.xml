@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dimensões da MenuActivity -->
+    <dimen name="paddingLayoutMenu">13sp</dimen>
+
+    <dimen name="labelHeightMenu">47sp</dimen>
+    <dimen name="labelTextSizeMenu">33sp</dimen>
+    <dimen name="labelMarginTopMenu">33sp</dimen>
+    <dimen name="spinnerHeightMenu">67sp</dimen>
+    <dimen name="spinnerMarginTopMenu">17sp</dimen>
+    <dimen name="buttonStartMIPPMarginTop">100sp</dimen>
+    <dimen name="buttonStartMIPPHeight">100sp</dimen>
+    <dimen name="buttonStartMIPPTextSize">30sp</dimen>
+
+
+    <!-- Dimensões da MainActivity -->
+    <dimen name="imageWidth">499sp</dimen>
+    <dimen name="imageMarginTop">51sp</dimen>
+
+    <dimen name="descricao_all">25sp</dimen>
+    <dimen name="descricaomargemtop_all">99sp</dimen>
+    <dimen name="marginLeftCodigo">525sp</dimen>
+    <dimen name="marginLeftDescricao">700sp</dimen>
+    <dimen name="marginLeftValor">1150sp</dimen>
+    <dimen name="textViewHeight">36.5sp</dimen>
+
+    <dimen name="marginLeftSetor">13sp</dimen>
+    <dimen name="textSizeSetor">40sp</dimen>
+
+    <!-- Dimensões do Spinner -->
+    <dimen name="textSizeSpinnerItem">26sp</dimen>
+    <dimen name="textSizeSpinnerSelected">33sp</dimen>
+    <dimen name="heightSpinner">43sp</dimen>
+</resources>

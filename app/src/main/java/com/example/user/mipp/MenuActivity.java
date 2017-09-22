@@ -2,9 +2,8 @@ package com.example.user.mipp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -51,9 +50,7 @@ public class MenuActivity extends AppCompatActivity {
         UnDepto unDepto = new UnDepto();
         try {
             unDepto = (UnDepto) conun.execute().get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
 
@@ -84,9 +81,7 @@ public class MenuActivity extends AppCompatActivity {
                 ConnectionIDs CID = new ConnectionIDs();
                 try {
                     ids = (int[]) CID.execute(selectedIndexUn, selectedIndexDp).get();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
+                } catch (InterruptedException | ExecutionException e) {
                     e.printStackTrace();
                 }
 
@@ -94,7 +89,7 @@ public class MenuActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putInt("unidade", ids[0]);
                 editor.putInt("departamento", ids[1]);
-                editor.commit();
+                editor.apply();
 
                 Intent goToMIPP = new Intent(getApplicationContext(), MainActivity.class);
 
@@ -102,6 +97,7 @@ public class MenuActivity extends AppCompatActivity {
                 goToMIPP.putExtra("departamento",ids[1]);
 
                 startActivity(goToMIPP);
+                finish();
             }
 
         });

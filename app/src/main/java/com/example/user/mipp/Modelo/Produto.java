@@ -2,19 +2,21 @@ package com.example.user.mipp.Modelo;
 
 import java.io.Serializable;
 
-/**
- * Created by user on 01/09/17.
- */
-
 public class Produto implements Serializable {
     private String cod;
     private String nomeProduto;
     private String preco;
-    private boolean promocao;
+//    private boolean promocao;
 
-    public boolean isPromocao() {return promocao;}
-
-    public void setPromocao(boolean promocao) {this.promocao = promocao;}
+    public Produto(String cod, String nomeProduto, String preco){
+        setCod(cod);
+        setNomeProduto(nomeProduto);
+        setPreco(preco);
+    }
+//
+//    public boolean isPromocao() {return promocao;}
+//
+//    public void setPromocao(boolean promocao) {this.promocao = promocao;}
 
     public String getCod() {return cod;}
 

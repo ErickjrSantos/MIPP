@@ -3,6 +3,10 @@
 
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="testText">DESCRIPTION</string>
+    <string name="labelUnidadeMenu">Unidade</string>
+    <string name="labelDepartamentoMenu">Departamento</string>
+    <string name="enterMippButton">Iniciar o MIPP</string>
     <string name="conteudo">codigo      descricao        R$ preco</string>
 
     <string name="setor1">GERAL</string>
@@ -13,4 +17,8 @@
     <string name="setor6">PREPARAÇÃO</string>
     <string name="setor7">NOBRE</string>
     <string name="setor8">ROTISSERIE</string>
+
+    <string name="title_activity_video">VideoActivity</string>
+
+    <string name="descriptionImagem">Imagem referente ao setor</string>
 </resources>

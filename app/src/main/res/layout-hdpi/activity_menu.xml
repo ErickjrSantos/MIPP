@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.user.mipp.MenuActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="1264dp"
+        android:layout_height="567dp"
         android:gravity="center_vertical|center_horizontal"
         android:orientation="vertical"
-        android:paddingLeft="20px"
+        android:paddingLeft="@dimen/paddingLayoutMenu"
+        android:paddingRight="@dimen/paddingLayoutMenu"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="70px"
-            android:text="Unidade"
+            android:layout_height="@dimen/labelHeightMenu"
+            android:text="@string/labelUnidadeMenu"
             android:textAlignment="center"
-            android:textSize="50px" />
+            android:textSize="@dimen/labelTextSizeMenu" />
 
         <Spinner
             android:id="@+id/spinnerUnidade"
             style="@style/Base.Widget.AppCompat.Spinner.Underlined"
             android:layout_width="match_parent"
-            android:layout_height="100px"
-            android:layout_marginTop="25px"
+            android:layout_height="@dimen/spinnerHeightMenu"
+            android:layout_marginTop="@dimen/spinnerMarginTopMenu"
             android:scrollbarSize="@dimen/descricaomargemtop_all"
             android:textAlignment="center" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
-            android:layout_height="70px"
-            android:layout_marginTop="50px"
-            android:text="Departamento"
+            android:layout_height="@dimen/labelHeightMenu"
+            android:layout_marginTop="@dimen/labelMarginTopMenu"
+            android:text="@string/labelDepartamentoMenu"
             android:textAlignment="center"
-            android:textSize="50px" />
+            android:textSize="@dimen/labelTextSizeMenu" />
 
         <Spinner
             android:id="@+id/spinnerDepto"
             style="@style/Base.Widget.AppCompat.Spinner.Underlined"
             android:layout_width="match_parent"
-            android:layout_height="100px"
-            android:layout_marginTop="25px"
+            android:layout_height="@dimen/spinnerHeightMenu"
+            android:layout_marginTop="@dimen/spinnerMarginTopMenu"
             android:fadeScrollbars="false"
             android:scrollbarSize="@dimen/descricaomargemtop_all"
             android:textAlignment="center" />
@@ -54,9 +54,9 @@
         <Button
             android:id="@+id/btnIniciaMIPP"
             android:layout_width="match_parent"
-            android:layout_height="150px"
-            android:layout_marginTop="150px"
-            android:text="Iniciar o MIPP"
-            android:textSize="45px" />
+            android:layout_height="@dimen/buttonStartMIPPHeight"
+            android:layout_marginTop="@dimen/buttonStartMIPPMarginTop"
+            android:text="@string/enterMippButton"
+            android:textSize="@dimen/buttonStartMIPPTextSize" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

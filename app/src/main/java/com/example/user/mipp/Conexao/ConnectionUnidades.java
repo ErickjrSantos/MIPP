@@ -1,27 +1,16 @@
 package com.example.user.mipp.Conexao;
 
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 
-import com.example.user.mipp.Modelo.Produto;
 import com.example.user.mipp.Modelo.Save;
-import com.example.user.mipp.Modelo.Tela;
 import com.example.user.mipp.Modelo.UnDepto;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
-import java.sql.Time;
-import java.util.ArrayList;
-import java.util.concurrent.TimeoutException;
 
 /**
  * Created by user on 20/09/17.

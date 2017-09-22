@@ -6,10 +6,10 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso1"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/entre_todas_descricoes"
-        android:layout_marginLeft="@dimen/descricaomargemleft_valor"
+        android:layout_height="@dimen/textViewHeight"
+        android:layout_marginLeft="@dimen/marginLeftValor"
         android:layout_marginTop="@dimen/descricaomargemtop_all"
-        android:text="descricao1"
+        android:text="@string/testText"
         android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
@@ -17,9 +17,9 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso2"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/entre_todas_descricoes"
-        android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:text="descricao2"
+        android:layout_height="@dimen/textViewHeight"
+        android:layout_marginLeft="@dimen/marginLeftValor"
+        android:text="@string/testText"
         android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
@@ -27,9 +27,9 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso3"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/entre_todas_descricoes"
-        android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:text="descricao3"
+        android:layout_height="@dimen/textViewHeight"
+        android:layout_marginLeft="@dimen/marginLeftValor"
+        android:text="@string/testText"
         android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
@@ -37,9 +37,9 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso4"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/entre_todas_descricoes"
-        android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:text="descricao4"
+        android:layout_height="@dimen/textViewHeight"
+        android:layout_marginLeft="@dimen/marginLeftValor"
+        android:text="@string/testText"
         android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
@@ -47,9 +47,9 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso5"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/entre_todas_descricoes"
-        android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:text="descricao5"
+        android:layout_height="@dimen/textViewHeight"
+        android:layout_marginLeft="@dimen/marginLeftValor"
+        android:text="@string/testText"
         android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
@@ -57,9 +57,9 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso6"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/entre_todas_descricoes"
-        android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:text="descricao6"
+        android:layout_height="@dimen/textViewHeight"
+        android:layout_marginLeft="@dimen/marginLeftValor"
+        android:text="@string/testText"
         android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
@@ -67,9 +67,9 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso7"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/entre_todas_descricoes"
-        android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:text="descricao7"
+        android:layout_height="@dimen/textViewHeight"
+        android:layout_marginLeft="@dimen/marginLeftValor"
+        android:text="@string/testText"
         android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
@@ -77,9 +77,9 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso8"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/entre_todas_descricoes"
-        android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:text="descricao8"
+        android:layout_height="@dimen/textViewHeight"
+        android:layout_marginLeft="@dimen/marginLeftValor"
+        android:text="@string/testText"
         android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
@@ -87,9 +87,9 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso9"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/entre_todas_descricoes"
-        android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:text="descricao9"
+        android:layout_height="@dimen/textViewHeight"
+        android:layout_marginLeft="@dimen/marginLeftValor"
+        android:text="@string/testText"
         android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
@@ -97,9 +97,9 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso10"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/entre_todas_descricoes"
-        android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:text="descricao10"
+        android:layout_height="@dimen/textViewHeight"
+        android:layout_marginLeft="@dimen/marginLeftValor"
+        android:text="@string/testText"
         android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
@@ -107,9 +107,9 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso11"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/entre_todas_descricoes"
-        android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:text="descricao11"
+        android:layout_height="@dimen/textViewHeight"
+        android:layout_marginLeft="@dimen/marginLeftValor"
+        android:text="@string/testText"
         android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
@@ -117,9 +117,9 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso12"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/entre_todas_descricoes"
-        android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:text="descricao12"
+        android:layout_height="@dimen/textViewHeight"
+        android:layout_marginLeft="@dimen/marginLeftValor"
+        android:text="@string/testText"
         android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
@@ -127,9 +127,9 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso13"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/entre_todas_descricoes"
-        android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:text="descricao13"
+        android:layout_height="@dimen/textViewHeight"
+        android:layout_marginLeft="@dimen/marginLeftValor"
+        android:text="@string/testText"
         android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
@@ -137,9 +137,9 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso14"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/entre_todas_descricoes"
-        android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:text="descricao14"
+        android:layout_height="@dimen/textViewHeight"
+        android:layout_marginLeft="@dimen/marginLeftValor"
+        android:text="@string/testText"
         android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
@@ -147,9 +147,9 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso15"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/entre_todas_descricoes"
-        android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:text="descricao15"
+        android:layout_height="@dimen/textViewHeight"
+        android:layout_marginLeft="@dimen/marginLeftValor"
+        android:text="@string/testText"
         android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
@@ -157,9 +157,9 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso16"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/entre_todas_descricoes"
-        android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:text="descricao16"
+        android:layout_height="@dimen/textViewHeight"
+        android:layout_marginLeft="@dimen/marginLeftValor"
+        android:text="@string/testText"
         android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
@@ -167,9 +167,9 @@
     <com.example.user.mipp.MIPPTextView
         android:id="@+id/peso17"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/entre_todas_descricoes"
-        android:layout_marginLeft="@dimen/descricaomargemleft_valor"
-        android:text="descricao17"
+        android:layout_height="@dimen/textViewHeight"
+        android:layout_marginLeft="@dimen/marginLeftValor"
+        android:text="@string/testText"
         android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />

@@ -11,13 +11,19 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 
-/**
- * Created by user on 11/09/17.
- */
-
 public class Save {
-    static Save saved;
-    Drawable grade;
+    private static Save saved;
+    private Drawable grade;
+
+    public int getQuantTelas() {
+        return quantTelas;
+    }
+
+    public void setQuantTelas(int quantTelas) {
+        this.quantTelas = quantTelas;
+    }
+
+    private int quantTelas = 0;
 
     public static Save getInstance(){
         if(saved == null)
@@ -36,8 +42,7 @@ public class Save {
     public static Drawable decode(String code){
         byte[] decodeString = Base64.decode(code,Base64.DEFAULT);
         Bitmap decodeByte = BitmapFactory.decodeByteArray(decodeString,0,decodeString.length);
-        BitmapDrawable draImg = new BitmapDrawable(decodeByte);
-        return draImg;
+        return new BitmapDrawable(decodeByte);
     }
 
     public static HttpURLConnection TestConnection(String url){

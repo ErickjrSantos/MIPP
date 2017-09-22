@@ -1,22 +1,23 @@
 package com.example.user.mipp;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.example.user.mipp.Conexao.Connection;
+
+import com.example.user.mipp.Conexao.ConnectionQtdTelas;
+import com.example.user.mipp.Conexao.ConnectionTela;
 import com.example.user.mipp.Modelo.Save;
 import com.example.user.mipp.Modelo.Tela;
-import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -28,15 +29,11 @@ public class MainActivity extends AppCompatActivity {
      * Whether or not the system UI should be auto-hidden after
      * {@link #timer} milliseconds.
      */
-    private static final boolean AUTO_HIDE = true;
+
     private static int loja;
     private static int departamento;
-
-
-    /**
-     * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
-     * user interaction before hiding the system UI.
-     */
+    int jTime = 0;
+    boolean vTest = false;
     private static int timer = 4000;
 
     /**
@@ -148,25 +145,9 @@ public class MainActivity extends AppCompatActivity {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-        Connection CLP = new Connection();
-        try {
-            CLP.execute(loja,departamento).get();
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-        }
-
-        FrameLayout fundo = (FrameLayout) findViewById(R.id.fundo);
-        Drawable img = Save.getInstance().getGrade();
-        fundo.setBackground(img);
 
         carregaProdutos();
-
-
-
-
     }
-
-
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -221,11 +202,12 @@ public class MainActivity extends AppCompatActivity {
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
 
-
-
-    int jTime = 0;
-    boolean vTest = false;
-
+    @Override
+    public void onBackPressed(){
+        Intent goToMenu = new Intent(getApplicationContext(), MenuActivity.class);
+        startActivity(goToMenu);
+        finish();
+    }
 
     public void carregaProdutos() {
 
@@ -255,44 +237,50 @@ public class MainActivity extends AppCompatActivity {
                         vTest=true;
                     }
                 }
-
             }
 
             public void onFinish() {
                 try {
+                    if(jTime == 0){
+                        ConnectionQtdTelas CQT = new ConnectionQtdTelas();
+                        CQT.execute(loja, departamento).get();
+                        FrameLayout fundo = (FrameLayout) findViewById(R.id.fundo);
+                        Drawable img = Save.getInstance().getGrade();
+                        fundo.setBackground(img);
+                    }
 
-                    Connection CLP = new Connection();
-                    ArrayList<Tela> telas = (ArrayList<Tela>) CLP.execute(loja,departamento).get();
-
-                    if(jTime >= telas.size()){
+                    if(jTime == Save.getInstance().getQuantTelas()){
                         jTime=0;
                     }
 
-                    int qtdProd = telas.get(jTime).getProdutos().size();
+                    ConnectionTela CLP = new ConnectionTela();
+                    Tela tela = (Tela) CLP.execute(loja, departamento, jTime+1).get();
 
-                    Drawable img = telas.get(jTime).getImagem();
+                    int qtdProd = tela.getProdutos().size();
+
+                    Drawable img = tela.getImagem();
                     ImageView animation = (ImageView) findViewById(R.id.animation);
                     animation.setBackground(img);
 
-                    timer = telas.get(jTime).getTimer();
+                    timer = tela.getTimer();
                     timer = timer * 1000;
 
-                    if(telas.get(jTime).getQtdProdutos() > 0) {
+                    if(tela.getQtdProdutos() > 0) {
                         for (int i = 0; i < qtdProd; i++) {
 
                             int textcodigo = getResources().getIdentifier("codigo" + (i + 1), "id", getPackageName());//R.id.codigo1
                             TextView textViewcodigo = (TextView) findViewById(textcodigo);
-                            String cod = telas.get(jTime).getProdutos().get(i).getCod();
+                            String cod = tela.getProdutos().get(i).getCod();
                             textViewcodigo.setText(cod);
 
                             int textdescri = getResources().getIdentifier("descricao" + (i + 1), "id", getPackageName());
                             TextView textView = (TextView) findViewById(textdescri);
-                            String descricao = telas.get(jTime).getProdutos().get(i).getNomeProduto();
+                            String descricao = tela.getProdutos().get(i).getNomeProduto();
                             textView.setText(descricao);
 
                             int textpeso = getResources().getIdentifier("peso" + (i + 1), "id", getPackageName());
                             TextView textViewpeso = (TextView) findViewById(textpeso);
-                            String preco = telas.get(jTime).getProdutos().get(i).getPreco();
+                            String preco = tela.getProdutos().get(i).getPreco();
                             preco = preco.replace('.', ',');
                             textViewpeso.setText("R$ " + preco);
                         }
@@ -317,7 +305,7 @@ public class MainActivity extends AppCompatActivity {
                     }else{
                         timer = 0;
                     }
-                    if(jTime < telas.size()) {
+                    if(jTime < Save.getInstance().getQuantTelas()) {
                         jTime++;
                     }
 
@@ -329,9 +317,5 @@ public class MainActivity extends AppCompatActivity {
                 carregaProdutos();
             }
         }.start();
-
-
-
-
     }
 }

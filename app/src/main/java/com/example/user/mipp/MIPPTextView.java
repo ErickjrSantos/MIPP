@@ -2,13 +2,8 @@ package com.example.user.mipp;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.provider.SyncStateContract;
 import android.util.AttributeSet;
-import android.widget.TextView;
 
-/**
- * Created by user on 13/09/17.
- */
 
 public class MIPPTextView extends android.support.v7.widget.AppCompatTextView {
 

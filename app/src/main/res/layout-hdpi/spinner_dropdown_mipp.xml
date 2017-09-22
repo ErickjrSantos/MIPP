@@ -4,7 +4,7 @@
     style="?android:attr/spinnerDropDownItemStyle"
     android:singleLine="true"
     android:layout_width="match_parent"
-    android:layout_height="65px"
+    android:layout_height="@dimen/heightSpinner"
     android:ellipsize="marquee"
-    android:textSize="40px"
+    android:textSize="@dimen/textSizeSpinnerItem"
     android:textAlignment="center"/>

@@ -10,11 +10,11 @@
         android:id="@+id/nomeSetor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="13sp"
+        android:layout_marginLeft="@dimen/marginLeftSetor"
         android:fontFamily="sans-serif-smallcaps"
         android:textAlignment="viewStart"
         android:textColor="@android:color/white"
-        android:textSize="40sp"
+        android:textSize="@dimen/textSizeSetor"
         android:textStyle="bold" />
 
     <include layout="@layout/tabeladepreco" />
@@ -48,9 +48,10 @@
 
     <ImageView
         android:id="@+id/animation"
-        android:layout_width="499sp"
+        android:contentDescription="@string/descriptionImagem"
+        android:layout_width="@dimen/imageWidth"
         android:layout_height="match_parent"
-        android:layout_marginTop="51sp"
+        android:layout_marginTop="@dimen/imageMarginTop"
         />
 
 </FrameLayout>
