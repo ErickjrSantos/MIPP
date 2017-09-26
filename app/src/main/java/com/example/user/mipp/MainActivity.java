@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         TextView txtSetor = (TextView) findViewById(R.id.nomeSetor);
+
         switch (departamento){
             case 1:
                 txtSetor.setText(getResources().getString(R.string.setor1));
@@ -204,8 +205,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        Intent goToMenu = new Intent(getApplicationContext(), MenuActivity.class);
-        startActivity(goToMenu);
+        super.onBackPressed();
         finish();
     }
 
@@ -264,22 +264,30 @@ public class MainActivity extends AppCompatActivity {
 
                     timer = tela.getTimer();
                     timer = timer * 1000;
-
+                    int corProduto;
                     if(tela.getQtdProdutos() > 0) {
                         for (int i = 0; i < qtdProd; i++) {
+                            if(tela.getProdutos().get(i).isPromocao())
+                                corProduto = getResources().getColor(R.color.Promocao);
+                            else
+                                corProduto = getResources().getColor(R.color.Preto);
+
 
                             int textcodigo = getResources().getIdentifier("codigo" + (i + 1), "id", getPackageName());//R.id.codigo1
                             TextView textViewcodigo = (TextView) findViewById(textcodigo);
+                            textViewcodigo.setTextColor(corProduto);
                             String cod = tela.getProdutos().get(i).getCod();
                             textViewcodigo.setText(cod);
 
                             int textdescri = getResources().getIdentifier("descricao" + (i + 1), "id", getPackageName());
                             TextView textView = (TextView) findViewById(textdescri);
+                            textView.setTextColor(corProduto);
                             String descricao = tela.getProdutos().get(i).getNomeProduto();
                             textView.setText(descricao);
 
                             int textpeso = getResources().getIdentifier("peso" + (i + 1), "id", getPackageName());
                             TextView textViewpeso = (TextView) findViewById(textpeso);
+                            textViewpeso.setTextColor(corProduto);
                             String preco = tela.getProdutos().get(i).getPreco();
                             preco = preco.replace('.', ',');
                             textViewpeso.setText("R$ " + preco);

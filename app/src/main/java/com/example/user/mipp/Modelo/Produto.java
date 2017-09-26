@@ -6,17 +6,18 @@ public class Produto implements Serializable {
     private String cod;
     private String nomeProduto;
     private String preco;
-//    private boolean promocao;
+    private boolean promocao;
 
-    public Produto(String cod, String nomeProduto, String preco){
+    public Produto(String cod, String nomeProduto, String preco, boolean promocao){
         setCod(cod);
         setNomeProduto(nomeProduto);
         setPreco(preco);
+        setPromocao(promocao);
     }
-//
-//    public boolean isPromocao() {return promocao;}
-//
-//    public void setPromocao(boolean promocao) {this.promocao = promocao;}
+
+    public boolean isPromocao() {return promocao;}
+
+    public void setPromocao(boolean promocao) {this.promocao = promocao;}
 
     public String getCod() {return cod;}
 

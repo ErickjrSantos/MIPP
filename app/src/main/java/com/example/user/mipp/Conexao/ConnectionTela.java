@@ -60,8 +60,9 @@ public class ConnectionTela extends AsyncTask{
                 String codP = JArrayProduto.getJSONObject(i).getString("codigo");
                 String desc = JArrayProduto.getJSONObject(i).getString("descricao");
                 String preco = JArrayProduto.getJSONObject(i).getString("preco");
+                boolean promocao = (JArrayProduto.getJSONObject(i).getInt("promocao") == 1);
 
-                Produto p = new Produto(codP, desc, preco);
+                Produto p = new Produto(codP, desc, preco, promocao);
 
                 t.addProduto(p);
             }

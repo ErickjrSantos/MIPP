@@ -56,7 +56,6 @@ public class ConnectionUnidades extends AsyncTask{
                     undepto.departamento.add((String)JArrayDeptos.get(i));
                 }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
             return null;
