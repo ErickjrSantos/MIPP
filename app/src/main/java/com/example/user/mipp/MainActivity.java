@@ -267,10 +267,13 @@ public class MainActivity extends AppCompatActivity {
                     int corProduto;
                     if(tela.getQtdProdutos() > 0) {
                         for (int i = 0; i < qtdProd; i++) {
+
+                            //Se o produto estiver em promoção, ele recebe a cor contida em R.color.Promocao
+                            //Se nao, recebe a cor contida em R.color.Normal
                             if(tela.getProdutos().get(i).isPromocao())
                                 corProduto = getResources().getColor(R.color.Promocao);
                             else
-                                corProduto = getResources().getColor(R.color.Preto);
+                                corProduto = getResources().getColor(R.color.Normal);
 
 
                             int textcodigo = getResources().getIdentifier("codigo" + (i + 1), "id", getPackageName());//R.id.codigo1

@@ -11,7 +11,6 @@
         android:layout_marginLeft="@dimen/marginLeftCodigo"
         android:layout_marginTop="@dimen/descricaomargemtop_all"
         android:text="@string/testText"
-        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
@@ -21,7 +20,6 @@
         android:layout_height="@dimen/textViewHeight"
         android:layout_marginLeft="@dimen/marginLeftCodigo"
         android:text="@string/testText"
-        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
@@ -31,7 +29,6 @@
         android:layout_height="@dimen/textViewHeight"
         android:layout_marginLeft="@dimen/marginLeftCodigo"
         android:text="@string/testText"
-        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
@@ -41,7 +38,6 @@
         android:layout_height="@dimen/textViewHeight"
         android:layout_marginLeft="@dimen/marginLeftCodigo"
         android:text="@string/testText"
-        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
@@ -51,7 +47,6 @@
         android:layout_height="@dimen/textViewHeight"
         android:layout_marginLeft="@dimen/marginLeftCodigo"
         android:text="@string/testText"
-        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
@@ -61,7 +56,6 @@
         android:layout_height="@dimen/textViewHeight"
         android:layout_marginLeft="@dimen/marginLeftCodigo"
         android:text="@string/testText"
-        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
@@ -71,7 +65,6 @@
         android:layout_height="@dimen/textViewHeight"
         android:layout_marginLeft="@dimen/marginLeftCodigo"
         android:text="@string/testText"
-        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
@@ -81,7 +74,6 @@
         android:layout_height="@dimen/textViewHeight"
         android:layout_marginLeft="@dimen/marginLeftCodigo"
         android:text="@string/testText"
-        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
@@ -91,7 +83,6 @@
         android:layout_height="@dimen/textViewHeight"
         android:layout_marginLeft="@dimen/marginLeftCodigo"
         android:text="@string/testText"
-        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
@@ -101,7 +92,6 @@
         android:layout_height="@dimen/textViewHeight"
         android:layout_marginLeft="@dimen/marginLeftCodigo"
         android:text="@string/testText"
-        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
@@ -111,7 +101,6 @@
         android:layout_height="@dimen/textViewHeight"
         android:layout_marginLeft="@dimen/marginLeftCodigo"
         android:text="@string/testText"
-        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
@@ -121,7 +110,6 @@
         android:layout_height="@dimen/textViewHeight"
         android:layout_marginLeft="@dimen/marginLeftCodigo"
         android:text="@string/testText"
-        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
@@ -131,7 +119,6 @@
         android:layout_height="@dimen/textViewHeight"
         android:layout_marginLeft="@dimen/marginLeftCodigo"
         android:text="@string/testText"
-        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
@@ -141,7 +128,6 @@
         android:layout_height="@dimen/textViewHeight"
         android:layout_marginLeft="@dimen/marginLeftCodigo"
         android:text="@string/testText"
-        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
@@ -151,7 +137,6 @@
         android:layout_height="@dimen/textViewHeight"
         android:layout_marginLeft="@dimen/marginLeftCodigo"
         android:text="@string/testText"
-        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
@@ -161,7 +146,6 @@
         android:layout_height="@dimen/textViewHeight"
         android:layout_marginLeft="@dimen/marginLeftCodigo"
         android:text="@string/testText"
-        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
@@ -171,7 +155,6 @@
         android:layout_height="@dimen/textViewHeight"
         android:layout_marginLeft="@dimen/marginLeftCodigo"
         android:text="@string/testText"
-        android:textColor="@color/Preto"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 

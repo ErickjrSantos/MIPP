@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#BDBFC1</color>
     <color name="colorAccent">#2FE58B</color>
 
-    <color name="Preto">#88000000</color>
+    <color name="Normal">#88000000</color>
     <color name="Promocao">#A8D00000</color>
     <color name="black_overlay">#AA000000</color>
 </resources>
