@@ -20,7 +20,7 @@
     <dimen name="descricao_all">25sp</dimen>
     <dimen name="descricaomargemtop_all">99sp</dimen>
     <dimen name="marginLeftCodigo">525sp</dimen>
-    <dimen name="marginLeftDescricao">700sp</dimen>
+    <dimen name="marginLeftDescricao">680sp</dimen>
     <dimen name="marginLeftValor">1150sp</dimen>
     <dimen name="textViewHeight">36.5sp</dimen>
 

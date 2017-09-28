@@ -45,13 +45,15 @@ public class MenuActivity extends AppCompatActivity {
         ArrayList<String> unidades;
         ArrayList<String> departamentos;
 
-
         ConnectionUnidades conun = new ConnectionUnidades();
         UnDepto unDepto = new UnDepto();
+
         try {
-            unDepto = (UnDepto) conun.execute().get();
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
+            unDepto = (UnDepto) conun.execute(getApplicationContext()).get();
+        } catch (Exception e) {
+            Intent intent = new Intent(getApplicationContext(),StandbyActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         unidades = unDepto.unidade;
@@ -80,7 +82,7 @@ public class MenuActivity extends AppCompatActivity {
                 int[] ids = null;
                 ConnectionIDs CID = new ConnectionIDs();
                 try {
-                    ids = (int[]) CID.execute(selectedIndexUn, selectedIndexDp).get();
+                    ids = (int[]) CID.execute(selectedIndexUn, selectedIndexDp, getApplicationContext()).get();
                 } catch (InterruptedException | ExecutionException e) {
                     e.printStackTrace();
                 }

@@ -1,5 +1,6 @@
 package com.example.user.mipp.Conexao;
 
+import android.content.Context;
 import android.os.AsyncTask;
 
 import com.example.user.mipp.Modelo.Save;
@@ -17,13 +18,12 @@ public class ConnectionIDs extends AsyncTask {
     protected int[] doInBackground(Object[] params) {
         int[] ids = new int[2];
         try {
-            HttpURLConnection con;
             String urlParameters = "un=" + params[0] + "&depto=" + params[1];
-            if(Save.TestConnection(url) != null){
-                con = Save.TestConnection(url, urlParameters);
-            }else{
+            Context context = (Context) params[2];
+            HttpURLConnection con = Save.TestConnection(context, url, urlParameters);
+            if(con == null){
                 url = "http://187.35.128.157:70/MIPP/unDeptoID.php";
-                con = Save.TestConnection(url, urlParameters);
+                con = Save.TestConnection(context, url, urlParameters);
             }
 
             StringBuilder response = new StringBuilder();

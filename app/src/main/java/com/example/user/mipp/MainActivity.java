@@ -1,9 +1,13 @@
 package com.example.user.mipp;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -147,7 +151,14 @@ public class MainActivity extends AppCompatActivity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
 
+
         carregaProdutos();
+
+
+
+
+
+
     }
 
     @Override
@@ -212,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
     public void carregaProdutos() {
 
 
-        new CountDownTimer(timer, 10) {
+        new CountDownTimer(timer, 2) {
 
             public void onTick(long millisUntilFinished) {
 
@@ -241,20 +252,24 @@ public class MainActivity extends AppCompatActivity {
 
             public void onFinish() {
                 try {
-                    if(jTime == 0){
+
+                    ///Add tratamento de conexao para apresentar outra tela....
+
+
+                    if (jTime == 0) {
                         ConnectionQtdTelas CQT = new ConnectionQtdTelas();
-                        CQT.execute(loja, departamento).get();
+                        CQT.execute(loja, departamento, getApplicationContext()).get();
                         FrameLayout fundo = (FrameLayout) findViewById(R.id.fundo);
                         Drawable img = Save.getInstance().getGrade();
                         fundo.setBackground(img);
                     }
 
-                    if(jTime == Save.getInstance().getQuantTelas()){
-                        jTime=0;
+                    if (jTime == Save.getInstance().getQuantTelas()) {
+                        jTime = 0;
                     }
 
                     ConnectionTela CLP = new ConnectionTela();
-                    Tela tela = (Tela) CLP.execute(loja, departamento, jTime+1).get();
+                    Tela tela = (Tela) CLP.execute(loja, departamento, jTime + 1, getApplicationContext()).get();
 
                     int qtdProd = tela.getProdutos().size();
 
@@ -265,16 +280,18 @@ public class MainActivity extends AppCompatActivity {
                     timer = tela.getTimer();
                     timer = timer * 1000;
                     int corProduto;
-                    if(tela.getQtdProdutos() > 0) {
+                    if (tela.getQtdProdutos() >= 0) {
                         for (int i = 0; i < qtdProd; i++) {
 
                             //Se o produto estiver em promoção, ele recebe a cor contida em R.color.Promocao
                             //Se nao, recebe a cor contida em R.color.Normal
-                            if(tela.getProdutos().get(i).isPromocao())
-                                corProduto = getResources().getColor(R.color.Promocao);
-                            else
-                                corProduto = getResources().getColor(R.color.Normal);
+                            if (tela.getProdutos().get(i).isPromocao()) {
+                                corProduto = Color.parseColor(tela.getCorPromo());
 
+                            }else {
+
+                                corProduto = Color.parseColor(tela.getCorNormal());
+                            }
 
                             int textcodigo = getResources().getIdentifier("codigo" + (i + 1), "id", getPackageName());//R.id.codigo1
                             TextView textViewcodigo = (TextView) findViewById(textcodigo);
@@ -313,16 +330,18 @@ public class MainActivity extends AppCompatActivity {
                             String preco = "";
                             textViewpeso.setText(preco);
                         }
-                    }else{
+                    } else {
                         timer = 0;
                     }
-                    if(jTime < Save.getInstance().getQuantTelas()) {
+                    if (jTime < Save.getInstance().getQuantTelas()) {
                         jTime++;
                     }
 
                 } catch (Exception e) {
                     e.printStackTrace();
-
+                    Intent intent = new Intent(getApplicationContext(),StandbyActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
 
                 carregaProdutos();

@@ -1,10 +1,16 @@
 package com.example.user.mipp.Modelo;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Base64;
+
+import com.example.user.mipp.StandbyActivity;
 
 import java.io.DataOutputStream;
 import java.net.HttpURLConnection;
@@ -14,6 +20,15 @@ import java.net.URL;
 public class Save {
     private static Save saved;
     private Drawable grade;
+    private static boolean haveInternet = true;
+
+    public static boolean havesInternet() {
+        return haveInternet;
+    }
+
+    public static void setHaveInternet(boolean haveInternet) {
+        Save.haveInternet = haveInternet;
+    }
 
     public int getQuantTelas() {
         return quantTelas;
@@ -45,7 +60,17 @@ public class Save {
         return new BitmapDrawable(decodeByte);
     }
 
-    public static HttpURLConnection TestConnection(String url){
+    public  static void Network(Context context){
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnect = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        haveInternet = isConnect;
+
+    }
+
+    public static HttpURLConnection TestConnection(Context context, String url){
+        Network(context);
+
         HttpURLConnection con;
         try {
             URL obj = new URL(url);
@@ -64,12 +89,17 @@ public class Save {
         return con;
     }
 
-    public static HttpURLConnection TestConnection(String url, String urlParameters){
+    public static HttpURLConnection TestConnection(Context context, String url, String urlParameters){
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnect = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        haveInternet = isConnect;
+
         HttpURLConnection con;
         try {
             URL obj = new URL(url);
             con = (HttpURLConnection) obj.openConnection();
-            con.setConnectTimeout(1000);
+            con.setConnectTimeout(200);
             con.setRequestMethod("POST");
             con.setDoOutput(true);
 
@@ -82,5 +112,4 @@ public class Save {
         }
         return con;
     }
-
 }

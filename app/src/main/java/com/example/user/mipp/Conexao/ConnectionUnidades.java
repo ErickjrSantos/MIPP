@@ -1,5 +1,6 @@
 package com.example.user.mipp.Conexao;
 
+import android.content.Context;
 import android.os.AsyncTask;
 
 import com.example.user.mipp.Modelo.Save;
@@ -23,37 +24,37 @@ public class ConnectionUnidades extends AsyncTask{
     protected UnDepto doInBackground(Object[] params) {
         UnDepto undepto = new UnDepto();
         try {
-            HttpURLConnection con;
-            if(Save.TestConnection(url) != null){
-                con = Save.TestConnection(url);
-            }else{
+            Context context = (Context) params[0];
+            HttpURLConnection con = Save.TestConnection(context, url);
+            if(con == null){
                 url = "http://187.35.128.157:70/MIPP/buscaUnidades.php";
-                con = Save.TestConnection(url);
+                con = Save.TestConnection(context,url);
             }
+            if (con != null) {
+                StringBuilder response = new StringBuilder();
 
-            StringBuilder response = new StringBuilder();
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()));
+                String inputLine;
 
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
-            String inputLine;
-
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
-            String JsonStr = response.toString();
-
-
-            if (JsonStr != null) {
-                JSONObject jsonObjt = new JSONObject(JsonStr);
-
-                JSONArray JArrayUnidades = jsonObjt.getJSONArray("unidade");
-                JSONArray JArrayDeptos = jsonObjt.getJSONArray("departamento");
-                for(int i = 0; i < JArrayUnidades.length(); i++){
-                    undepto.unidade.add((String)JArrayUnidades.get(i));
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
                 }
-                for(int i = 0; i < JArrayDeptos.length(); i++){
-                    undepto.departamento.add((String)JArrayDeptos.get(i));
+                in.close();
+                String JsonStr = response.toString();
+
+
+                if (JsonStr != null) {
+                    JSONObject jsonObjt = new JSONObject(JsonStr);
+
+                    JSONArray JArrayUnidades = jsonObjt.getJSONArray("unidade");
+                    JSONArray JArrayDeptos = jsonObjt.getJSONArray("departamento");
+                    for (int i = 0; i < JArrayUnidades.length(); i++) {
+                        undepto.unidade.add((String) JArrayUnidades.get(i));
+                    }
+                    for (int i = 0; i < JArrayDeptos.length(); i++) {
+                        undepto.departamento.add((String) JArrayDeptos.get(i));
+                    }
                 }
             }
         } catch (Exception e) {

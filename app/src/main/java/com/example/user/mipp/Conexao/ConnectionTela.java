@@ -1,5 +1,6 @@
 package com.example.user.mipp.Conexao;
 
+import android.content.Context;
 import android.os.AsyncTask;
 
 import com.example.user.mipp.Modelo.Produto;
@@ -20,16 +21,15 @@ public class ConnectionTela extends AsyncTask{
     @Override
     protected Tela doInBackground(Object[] params) {
         String urlParameters = "codL=" + params[0] + "&codS=" + params[1] + "&codT=" + params[2];
+        Context context = (Context) params[3];
         Tela t;
 
         try {
 
-            HttpURLConnection con;
-            if(Save.TestConnection(url) != null){
-                con = Save.TestConnection(url, urlParameters);
-            }else{
+            HttpURLConnection con = Save.TestConnection(context, url, urlParameters);
+            if(con == null){
                 url = "http://187.35.128.157:70/MIPP/getTela.php";
-                con = Save.TestConnection(url, urlParameters);
+                con = Save.TestConnection(context, url, urlParameters);
             }
 
             StringBuilder response = new StringBuilder();
@@ -52,8 +52,10 @@ public class ConnectionTela extends AsyncTask{
             int timer = jsonObjt.getInt("timer");
             String imagem = jsonObjt.getString("imagem");
             int quantProdutos = jsonObjt.getInt("quantProdutos");
+            String corNormal = jsonObjt.getString("corNormal");
+            String corPromo = jsonObjt.getString("corPromo");
 
-            t = new Tela(codT, timer, imagem);
+            t = new Tela(codT, timer, imagem, corNormal, corPromo);
 
             JSONArray JArrayProduto = jsonObjt.getJSONArray("produtos");
             for(int i = 0; i < quantProdutos; i++){

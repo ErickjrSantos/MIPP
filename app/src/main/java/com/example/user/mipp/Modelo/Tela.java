@@ -9,13 +9,15 @@ import java.util.ArrayList;
 public class Tela implements Serializable {
     private int codigo;
     private int timer;
-    private String imagem;
+    private String imagem, corNormal, corPromo;
     private ArrayList<Produto> produtos = new ArrayList<>();
 
-    public Tela(int codigo, int timer, String imagem) {
+    public Tela(int codigo, int timer, String imagem, String corNormal, String corPromo) {
         setCodigo(codigo);
         setTimer(timer);
         setImagem(imagem);
+        setCorNormal(corNormal);
+        setCorPromo(corPromo);
     }
 
     private void setCodigo(int codigo) {
@@ -43,4 +45,19 @@ public class Tela implements Serializable {
     public ArrayList<Produto> getProdutos(){ return produtos; }
 
 
+    public String getCorPromo() {
+        return corPromo;
+    }
+
+    public void setCorPromo(String corPromo) {
+        this.corPromo = corPromo;
+    }
+
+    public String getCorNormal() {
+        return corNormal;
+    }
+
+    public void setCorNormal(String corNormal) {
+        this.corNormal = corNormal;
+    }
 }

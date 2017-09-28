@@ -1,19 +1,16 @@
 package com.example.user.mipp.Conexao;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 
-import com.example.user.mipp.Modelo.Produto;
 import com.example.user.mipp.Modelo.Save;
-import com.example.user.mipp.Modelo.Tela;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.util.ArrayList;
 
 
 public class ConnectionQtdTelas extends AsyncTask {
@@ -25,15 +22,13 @@ public class ConnectionQtdTelas extends AsyncTask {
     protected Object doInBackground(Object[] params) {
         Save save = Save.getInstance();
         String urlParameters = "codL=" + params[0] + "&codS=" + params[1];
-
+        Context context = (Context) params[2];
         try {
 
-            HttpURLConnection con;
-            if(Save.TestConnection(url) != null){
-                con = Save.TestConnection(url, urlParameters);
-            }else{
+            HttpURLConnection con = Save.TestConnection(context ,url, urlParameters);
+            if(con == null){
                 url = "http://187.35.128.157:70/MIPP/getQtdTelas.php";
-                con = Save.TestConnection(url, urlParameters);
+                con = Save.TestConnection(context, url, urlParameters);
             }
 
             StringBuilder response = new StringBuilder();
