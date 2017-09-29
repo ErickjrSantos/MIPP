@@ -2,6 +2,7 @@ package com.example.user.mipp;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -173,26 +174,9 @@ public class StandbyActivity extends AppCompatActivity {
     }
     int timer = 100;
     public void testNetwork(){
-        new CountDownTimer(timer,50) {
-
-            public void onTick(long l) {
-                Save.Network(getApplicationContext());
-                try {
-                    boolean tste = Save.havesInternet();
-                    if (tste) {
-                        Intent intent = new Intent(StandbyActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-
-                    }else{
-                        testNetwork();
-                    }
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-
-            public void onFinish() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
                 Save.Network(getApplicationContext());
                 try {
                     boolean tste = Save.havesInternet();
@@ -207,6 +191,6 @@ public class StandbyActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-        }.start();
+        }).start();
     }
 }

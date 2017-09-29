@@ -341,10 +341,11 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                     Intent intent = new Intent(getApplicationContext(),StandbyActivity.class);
                     startActivity(intent);
-                    finish();
-                }
 
-                carregaProdutos();
+                }
+                Save.Network(getApplicationContext());
+                if(Save.havesInternet())
+                    carregaProdutos();
             }
         }.start();
     }
