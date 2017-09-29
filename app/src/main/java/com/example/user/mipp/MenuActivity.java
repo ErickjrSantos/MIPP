@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.user.mipp.Conexao.ConnectionIDs;
 import com.example.user.mipp.Conexao.ConnectionUnidades;
@@ -48,13 +49,14 @@ public class MenuActivity extends AppCompatActivity {
         ConnectionUnidades conun = new ConnectionUnidades();
         UnDepto unDepto = new UnDepto();
 
+
         try {
             unDepto = (UnDepto) conun.execute(getApplicationContext()).get();
+
         } catch (Exception e) {
-            Intent intent = new Intent(getApplicationContext(),StandbyActivity.class);
-            startActivity(intent);
-            finish();
+            e.printStackTrace();
         }
+
 
         unidades = unDepto.unidade;
         departamentos = unDepto.departamento;
@@ -78,28 +80,31 @@ public class MenuActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String selectedIndexUn = spUn.getSelectedItem().toString();
                 String selectedIndexDp = spDp.getSelectedItem().toString();
+                if(selectedIndexDp.equals(" ") || selectedIndexUn.equals(" ") ){
+                    Toast.makeText(MenuActivity.this, "Selecione Departamento e unidade!!", Toast.LENGTH_SHORT).show();
+                }else {
+                    int[] ids = null;
+                    ConnectionIDs CID = new ConnectionIDs();
+                    try {
+                        ids = (int[]) CID.execute(selectedIndexUn, selectedIndexDp, getApplicationContext()).get();
+                    } catch (InterruptedException | ExecutionException e) {
+                        e.printStackTrace();
+                    }
 
-                int[] ids = null;
-                ConnectionIDs CID = new ConnectionIDs();
-                try {
-                    ids = (int[]) CID.execute(selectedIndexUn, selectedIndexDp, getApplicationContext()).get();
-                } catch (InterruptedException | ExecutionException e) {
-                    e.printStackTrace();
+                    SharedPreferences settings = getSharedPreferences(MIPP_PREFERENCES, 0);
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putInt("unidade", ids[0]);
+                    editor.putInt("departamento", ids[1]);
+                    editor.apply();
+
+                    Intent goToMIPP = new Intent(getApplicationContext(), MainActivity.class);
+
+                    goToMIPP.putExtra("unidade", ids[0]);
+                    goToMIPP.putExtra("departamento", ids[1]);
+
+                    startActivity(goToMIPP);
+                    finish();
                 }
-
-                SharedPreferences settings = getSharedPreferences(MIPP_PREFERENCES, 0);
-                SharedPreferences.Editor editor = settings.edit();
-                editor.putInt("unidade", ids[0]);
-                editor.putInt("departamento", ids[1]);
-                editor.apply();
-
-                Intent goToMIPP = new Intent(getApplicationContext(), MainActivity.class);
-
-                goToMIPP.putExtra("unidade",ids[0]);
-                goToMIPP.putExtra("departamento",ids[1]);
-
-                startActivity(goToMIPP);
-                finish();
             }
 
         });

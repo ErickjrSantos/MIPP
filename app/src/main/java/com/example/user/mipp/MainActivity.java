@@ -89,6 +89,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onRestart() {
+        carregaProdutos();
+        super.onRestart();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -147,18 +153,15 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+
+        Save.Network(getApplicationContext());
+        if(!Save.havesInternet()){
+            LimparTela();
+        }
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-
-
         carregaProdutos();
-
-
-
-
-
-
     }
 
     @Override
@@ -254,7 +257,12 @@ public class MainActivity extends AppCompatActivity {
                 try {
 
                     ///Add tratamento de conexao para apresentar outra tela....
-
+                    if(!Save.havesInternet()){
+                        while (!Save.havesInternet()) {
+                            Save.Network(getApplicationContext());
+                        }
+                        jTime = 0;
+                    }
 
                     if (jTime == 0) {
                         ConnectionQtdTelas CQT = new ConnectionQtdTelas();
@@ -339,14 +347,47 @@ public class MainActivity extends AppCompatActivity {
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Intent intent = new Intent(getApplicationContext(),StandbyActivity.class);
-                    startActivity(intent);
-
                 }
                 Save.Network(getApplicationContext());
-                if(Save.havesInternet())
-                    carregaProdutos();
+                if(!Save.havesInternet()) {
+                    LimparTela();
+                }
+                carregaProdutos();
             }
+
         }.start();
+    }
+
+    void LimparTela(){
+        FrameLayout fundo = (FrameLayout) findViewById(R.id.fundo);
+        fundo.setBackground(getResources().getDrawable(R.drawable.teste));
+
+        for (int i = 1; i <= 17; i++) {
+
+            int textcodigo = getResources().getIdentifier("codigo" + (i), "id", getPackageName());//R.id.codigo1
+            TextView textViewcodigo = (TextView) findViewById(textcodigo);
+            String cod = "";
+            textViewcodigo.setText(cod);
+
+            int textdescri = getResources().getIdentifier("descricao" + (i), "id", getPackageName());
+            TextView textView = (TextView) findViewById(textdescri);
+            String descricao = "";
+            textView.setText(descricao);
+
+            int textpeso = getResources().getIdentifier("peso" + (i), "id", getPackageName());
+            TextView textViewpeso = (TextView) findViewById(textpeso);
+            String preco = "";
+            textViewpeso.setText(preco);
+            vTest=true;
+        }
+
+        ImageView animation = (ImageView) findViewById(R.id.animation);
+        animation.setBackground(null);
+
+        int descri = getResources().getIdentifier("descricao"+(8), "id",getPackageName());
+        TextView textViewdesc = (TextView) findViewById(descri);
+        String descricao = "Não há internet, preços desatualizados";
+        textViewdesc.setText(descricao);
+        textViewdesc.setTextColor(Color.parseColor("#FFFFFFFF"));
     }
 }
