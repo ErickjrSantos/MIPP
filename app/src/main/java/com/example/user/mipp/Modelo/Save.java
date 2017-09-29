@@ -1,7 +1,6 @@
 package com.example.user.mipp.Modelo;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -9,8 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Base64;
-
-import com.example.user.mipp.StandbyActivity;
 
 import java.io.DataOutputStream;
 import java.net.HttpURLConnection;

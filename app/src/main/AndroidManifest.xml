@@ -42,11 +42,6 @@
             </intent-filter>
         </receiver>
 
-        <activity
-            android:name=".StandbyActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_standby"
-            android:theme="@style/FullscreenTheme"></activity>
     </application>
 
 </manifest>
