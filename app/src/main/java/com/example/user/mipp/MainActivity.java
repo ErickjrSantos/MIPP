@@ -1,27 +1,33 @@
 package com.example.user.mipp;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import com.example.user.mipp.Conexao.ConnectionQtdTelas;
 import com.example.user.mipp.Conexao.ConnectionTela;
 import com.example.user.mipp.Modelo.Save;
 import com.example.user.mipp.Modelo.Tela;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 
 /**
@@ -117,6 +123,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
         TextView txtSetor = (TextView) findViewById(R.id.nomeSetor);
 
         switch (departamento){
@@ -161,7 +169,8 @@ public class MainActivity extends AppCompatActivity {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-        carregaProdutos();
+         //playVideo();
+         carregaProdutos();
     }
 
     @Override
@@ -232,30 +241,13 @@ public class MainActivity extends AppCompatActivity {
 
 
                 if (!vTest) {
-                    for (int i = 1; i < 18; i++) {
-
-                        int textcodigo = getResources().getIdentifier("codigo" + (i), "id", getPackageName());//R.id.codigo1
-                        TextView textViewcodigo = (TextView) findViewById(textcodigo);
-                        String cod = "";
-                        textViewcodigo.setText(cod);
-
-                        int textdescri = getResources().getIdentifier("descricao" + (i), "id", getPackageName());
-                        TextView textView = (TextView) findViewById(textdescri);
-                        String descricao = "";
-                        textView.setText(descricao);
-
-                        int textpeso = getResources().getIdentifier("peso" + (i), "id", getPackageName());
-                        TextView textViewpeso = (TextView) findViewById(textpeso);
-                        String preco = "";
-                        textViewpeso.setText(preco);
-                        vTest=true;
-                    }
+                    //havia apenas limpa tela...mas este comando tambem coloca um fundo para referencia
+                    LimparTela();
                 }
             }
 
             public void onFinish() {
                 try {
-
                     ///Add tratamento de conexao para apresentar outra tela....
                     if(!Save.havesInternet()){
                         while (!Save.havesInternet()) {
@@ -281,65 +273,75 @@ public class MainActivity extends AppCompatActivity {
 
                     int qtdProd = tela.getProdutos().size();
 
-                    Drawable img = tela.getImagem();
-                    ImageView animation = (ImageView) findViewById(R.id.animation);
-                    animation.setBackground(img);
+
+                    if(tela.getTipoMidia().equals("imagem")){
+                        Drawable img = tela.getImagem();
+                        ImageView animation = (ImageView) findViewById(R.id.animation);
+                        animation.setBackground(img);
+                    }else{
+                        decodificador(String.valueOf(tela.getImagem()));
+                    }
 
                     timer = tela.getTimer();
                     timer = timer * 1000;
                     int corProduto;
-                    if (tela.getQtdProdutos() >= 0) {
-                        for (int i = 0; i < qtdProd; i++) {
 
-                            //Se o produto estiver em promoção, ele recebe a cor contida em R.color.Promocao
-                            //Se nao, recebe a cor contida em R.color.Normal
-                            if (tela.getProdutos().get(i).isPromocao()) {
-                                corProduto = Color.parseColor(tela.getCorPromo());
+                    //Se a midia for Video executar apenas este if...
+                    if(tela.getTipoMidia().equals("video")){
+                        playVideo();
+                    }else {
 
-                            }else {
+                        if (tela.getQtdProdutos() >= 0) {
+                            for (int i = 0; i < qtdProd; i++) {
+                                //Se o produto estiver em promoção, ele recebe a cor contida em R.color.Promocao
+                                //Se nao, recebe a cor contida em R.color.Normal
+                                if (tela.getProdutos().get(i).isPromocao()) {
+                                    corProduto = Color.parseColor(tela.getCorPromo());
 
-                                corProduto = Color.parseColor(tela.getCorNormal());
+                                } else {
+                                    corProduto = Color.parseColor(tela.getCorNormal());
+                                }
+
+                                int textcodigo = getResources().getIdentifier("codigo" + (i + 1), "id", getPackageName());//R.id.codigo1
+                                TextView textViewcodigo = (TextView) findViewById(textcodigo);
+                                textViewcodigo.setTextColor(corProduto);
+                                String cod = tela.getProdutos().get(i).getCod();
+                                textViewcodigo.setText(cod);
+
+                                int textdescri = getResources().getIdentifier("descricao" + (i + 1), "id", getPackageName());
+                                TextView textView = (TextView) findViewById(textdescri);
+                                textView.setTextColor(corProduto);
+                                String descricao = tela.getProdutos().get(i).getNomeProduto();
+                                textView.setText(descricao);
+
+                                int textpeso = getResources().getIdentifier("peso" + (i + 1), "id", getPackageName());
+                                TextView textViewpeso = (TextView) findViewById(textpeso);
+                                textViewpeso.setTextColor(corProduto);
+                                String preco = tela.getProdutos().get(i).getPreco();
+                                preco = preco.replace('.', ',');
+                                textViewpeso.setText("R$ " + preco);
                             }
 
-                            int textcodigo = getResources().getIdentifier("codigo" + (i + 1), "id", getPackageName());//R.id.codigo1
-                            TextView textViewcodigo = (TextView) findViewById(textcodigo);
-                            textViewcodigo.setTextColor(corProduto);
-                            String cod = tela.getProdutos().get(i).getCod();
-                            textViewcodigo.setText(cod);
+                            for (int i = qtdProd; i < 17; i++) {
 
-                            int textdescri = getResources().getIdentifier("descricao" + (i + 1), "id", getPackageName());
-                            TextView textView = (TextView) findViewById(textdescri);
-                            textView.setTextColor(corProduto);
-                            String descricao = tela.getProdutos().get(i).getNomeProduto();
-                            textView.setText(descricao);
+                                int textcodigo = getResources().getIdentifier("codigo" + (i + 1), "id", getPackageName());//R.id.codigo1
+                                TextView textViewcodigo = (TextView) findViewById(textcodigo);
+                                String cod = "";
+                                textViewcodigo.setText(cod);
 
-                            int textpeso = getResources().getIdentifier("peso" + (i + 1), "id", getPackageName());
-                            TextView textViewpeso = (TextView) findViewById(textpeso);
-                            textViewpeso.setTextColor(corProduto);
-                            String preco = tela.getProdutos().get(i).getPreco();
-                            preco = preco.replace('.', ',');
-                            textViewpeso.setText("R$ " + preco);
+                                int textdescri = getResources().getIdentifier("descricao" + (i + 1), "id", getPackageName());
+                                TextView textView = (TextView) findViewById(textdescri);
+                                String descricao = "";
+                                textView.setText(descricao);
+
+                                int textpeso = getResources().getIdentifier("peso" + (i + 1), "id", getPackageName());
+                                TextView textViewpeso = (TextView) findViewById(textpeso);
+                                String preco = "";
+                                textViewpeso.setText(preco);
+                            }
+                        } else {
+                            timer = 0;
                         }
-
-                        for (int i = qtdProd; i < 17; i++) {
-
-                            int textcodigo = getResources().getIdentifier("codigo" + (i + 1), "id", getPackageName());//R.id.codigo1
-                            TextView textViewcodigo = (TextView) findViewById(textcodigo);
-                            String cod = "";
-                            textViewcodigo.setText(cod);
-
-                            int textdescri = getResources().getIdentifier("descricao" + (i + 1), "id", getPackageName());
-                            TextView textView = (TextView) findViewById(textdescri);
-                            String descricao = "";
-                            textView.setText(descricao);
-
-                            int textpeso = getResources().getIdentifier("peso" + (i + 1), "id", getPackageName());
-                            TextView textViewpeso = (TextView) findViewById(textpeso);
-                            String preco = "";
-                            textViewpeso.setText(preco);
-                        }
-                    } else {
-                        timer = 0;
                     }
                     if (jTime < Save.getInstance().getQuantTelas()) {
                         jTime++;
@@ -389,5 +391,43 @@ public class MainActivity extends AppCompatActivity {
         String descricao = "Não há internet, preços desatualizados";
         textViewdesc.setText(descricao);
         textViewdesc.setTextColor(Color.parseColor("#FFFFFFFF"));
+    }
+
+   public void  playVideo(){
+
+        try {
+            String url = Environment.getExternalStorageDirectory() + "/my/Convert.mp4"  ;//"android.resource://" + getPackageName() + "/" + R.raw.teste; // your URL here
+
+            MediaController mc = new MediaController(this);
+            VideoView vv = (VideoView) findViewById(R.id.videoView);
+            vv.setVisibility(View.VISIBLE);
+            vv.setMediaController(mc);
+            vv.setVideoPath(url);
+            vv.requestFocus();
+            vv.start();
+            mc.show();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public String decodificador(String data){
+
+        byte[] video = Base64.decode(data , Base64.DEFAULT);
+        try {
+
+            FileOutputStream out = new FileOutputStream(
+                    Environment.getExternalStorageDirectory()
+                            + "/my/Convert.mp4");
+            out.write(video);
+            out.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("Error", e.toString());
+
+        }
+        return null;
     }
 }

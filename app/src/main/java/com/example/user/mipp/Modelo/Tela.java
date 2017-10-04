@@ -8,13 +8,19 @@ import java.util.ArrayList;
 
 public class Tela implements Serializable {
     private int codigo;
+    private String tipoMidia;
     private int timer;
     private String imagem, corNormal, corPromo;
+
+
+
+
     private ArrayList<Produto> produtos = new ArrayList<>();
 
-    public Tela(int codigo, int timer, String imagem, String corNormal, String corPromo) {
+    public Tela(int codigo, int timer,String tipoMidia, String imagem, String corNormal, String corPromo) {
         setCodigo(codigo);
         setTimer(timer);
+        setTipoMidia(tipoMidia);
         setImagem(imagem);
         setCorNormal(corNormal);
         setCorPromo(corPromo);
@@ -32,9 +38,11 @@ public class Tela implements Serializable {
         this.timer = timer;
     }
 
-    public int getQtdProdutos() {
-        return produtos.size();
-    }
+    public int getQtdProdutos() {return produtos.size();}
+
+    public String getTipoMidia() {return tipoMidia;}
+
+    public void setTipoMidia(String tipoMidia) {this.tipoMidia = tipoMidia;}
 
     private void setImagem(String imagem) { this.imagem = imagem; }
 

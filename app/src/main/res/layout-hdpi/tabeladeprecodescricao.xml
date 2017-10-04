@@ -151,7 +151,7 @@
         android:layout_width="wrap_content"
         android:layout_height="@dimen/textViewHeight"
         android:layout_marginLeft="@dimen/marginLeftDescricao"
-        android:text="descricao1@string/testText6"
+        android:text="@string/testText"
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 

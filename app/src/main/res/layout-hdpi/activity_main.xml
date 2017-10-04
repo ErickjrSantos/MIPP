@@ -6,6 +6,7 @@
     tools:context="com.example.user.mipp.MainActivity">
 
 
+
     <TextView
         android:id="@+id/nomeSetor"
         android:layout_width="match_parent"
@@ -16,6 +17,8 @@
         android:textColor="@android:color/white"
         android:textSize="@dimen/textSizeSetor"
         android:textStyle="bold" />
+
+    <include layout="@layout/video_mipp"/> <!-- Apenas o video -->
 
     <include layout="@layout/tabeladepreco" />
     <include layout="@layout/tabeladeprecodescricao" />
@@ -44,6 +47,7 @@
         </LinearLayout>
 
 
+
     </FrameLayout>
 
     <ImageView
@@ -53,5 +57,6 @@
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/imageMarginTop"
         />
+
 
 </FrameLayout>

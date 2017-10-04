@@ -3,7 +3,7 @@
 
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="testText">DESCRIPTION</string>
+    <string name="testText"> </string>
     <string name="labelUnidadeMenu">Unidade</string>
     <string name="labelDepartamentoMenu">Departamento</string>
     <string name="enterMippButton">Iniciar o MIPP</string>

@@ -50,12 +50,13 @@ public class ConnectionTela extends AsyncTask{
 
             int codT = jsonObjt.getInt("codigo");
             int timer = jsonObjt.getInt("timer");
+            String tipoMidia = jsonObjt.getString("tipoMidia");
             String imagem = jsonObjt.getString("imagem");
             int quantProdutos = jsonObjt.getInt("quantProdutos");
             String corNormal = jsonObjt.getString("corNormal");
             String corPromo = jsonObjt.getString("corPromo");
 
-            t = new Tela(codT, timer, imagem, corNormal, corPromo);
+            t = new Tela(codT, timer,tipoMidia, imagem, corNormal, corPromo);
 
             JSONArray JArrayProduto = jsonObjt.getJSONArray("produtos");
             for(int i = 0; i < quantProdutos; i++){
