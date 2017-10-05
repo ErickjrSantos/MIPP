@@ -50,6 +50,7 @@ public class MenuActivity extends AppCompatActivity {
         final Spinner spUn = (Spinner) findViewById(R.id.spinnerUnidade);
         final Spinner spDp = (Spinner) findViewById(R.id.spinnerDepto);
 
+        //Evento ao clicar no botão das unidades
         spUn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -74,6 +75,7 @@ public class MenuActivity extends AppCompatActivity {
 
         });
 
+        //Evento ao clicar no botão dos departamentos
         spDp.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
