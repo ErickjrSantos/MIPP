@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -43,36 +44,58 @@ public class MenuActivity extends AppCompatActivity {
             startActivity(goToMIPP);
         }
 
-        ArrayList<String> unidades;
-        ArrayList<String> departamentos;
-
-        ConnectionUnidades conun = new ConnectionUnidades();
-        UnDepto unDepto = new UnDepto();
 
 
-        try {
-            unDepto = (UnDepto) conun.execute(getApplicationContext()).get();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        unidades = unDepto.unidade;
-        departamentos = unDepto.departamento;
-
-        ArrayAdapter<String> adptUn = new ArrayAdapter<String>(
-                this, R.layout.spinner_mipp, unidades);
-        final ArrayAdapter<String> adptDp = new ArrayAdapter<String>(
-                this, R.layout.spinner_mipp, departamentos);
-        adptUn.setDropDownViewResource(R.layout.spinner_dropdown_mipp);
-        adptDp.setDropDownViewResource(R.layout.spinner_dropdown_mipp);
 
         final Spinner spUn = (Spinner) findViewById(R.id.spinnerUnidade);
         final Spinner spDp = (Spinner) findViewById(R.id.spinnerDepto);
 
-        spUn.setAdapter(adptUn);
-        spDp.setAdapter(adptDp);
+        spUn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                ConnectionUnidades conun = new ConnectionUnidades();
+                UnDepto unDepto = new UnDepto();
+                try {
+                    unDepto = (UnDepto) conun.execute(getApplicationContext()).get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+                ArrayList<String> unidades;
+                unidades = unDepto.unidade;
+
+                ArrayAdapter<String> adptUn = new ArrayAdapter<>(MenuActivity.this, R.layout.spinner_mipp, unidades);
+                adptUn.setDropDownViewResource(R.layout.spinner_dropdown_mipp);
+                spUn.setAdapter(adptUn);
+
+                return false;
+            }
+
+        });
+
+        spDp.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                ConnectionUnidades conun = new ConnectionUnidades();
+                UnDepto unDepto = new UnDepto();
+                try {
+                    unDepto = (UnDepto) conun.execute(getApplicationContext()).get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+                ArrayList<String> departamentos;
+                departamentos = unDepto.departamento;
+
+                ArrayAdapter<String> adptDp = new ArrayAdapter<>(MenuActivity.this, R.layout.spinner_mipp, departamentos);
+                adptDp.setDropDownViewResource(R.layout.spinner_dropdown_mipp);
+                spDp.setAdapter(adptDp);
+                return false;
+            }
+
+        });
 
         Button btnEntrar = (Button) findViewById(R.id.btnIniciaMIPP);
         btnEntrar.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +103,22 @@ public class MenuActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String selectedIndexUn = spUn.getSelectedItem().toString();
                 String selectedIndexDp = spDp.getSelectedItem().toString();
-                if(selectedIndexDp.equals(" ") || selectedIndexUn.equals(" ") ){
+
+                ConnectionUnidades conun = new ConnectionUnidades();
+                UnDepto unDepto = new UnDepto();
+                try {
+                    unDepto = (UnDepto) conun.execute(getApplicationContext()).get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+                ArrayList<String> unidades;
+                unidades = unDepto.unidade;
+                ArrayList<String> departamentos;
+                departamentos = unDepto.departamento;
+
+                if((selectedIndexDp.equals(" ") || selectedIndexUn.equals(" ")) && unidades.contains(selectedIndexUn) && departamentos.contains(selectedIndexDp)){
                     Toast.makeText(MenuActivity.this, "Selecione Departamento e unidade!!", Toast.LENGTH_SHORT).show();
                 }else {
                     int[] ids = null;
@@ -103,7 +141,6 @@ public class MenuActivity extends AppCompatActivity {
                     goToMIPP.putExtra("departamento", ids[1]);
 
                     startActivity(goToMIPP);
-                    finish();
                 }
             }
 
