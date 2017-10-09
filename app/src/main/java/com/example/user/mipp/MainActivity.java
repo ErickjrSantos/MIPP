@@ -2,27 +2,20 @@ package com.example.user.mipp;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-
-import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -30,10 +23,6 @@ import com.example.user.mipp.Conexao.ConnectionQtdTelas;
 import com.example.user.mipp.Conexao.ConnectionTela;
 import com.example.user.mipp.Modelo.Save;
 import com.example.user.mipp.Modelo.Tela;
-
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
 
 /**
@@ -237,7 +226,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        super.onBackPressed();
         finish();
     }
 
@@ -257,7 +245,7 @@ public class MainActivity extends AppCompatActivity {
 
             public void onFinish() {
                 try {
-                    ///Add tratamento de conexao para apresentar outra tela....
+                    // Add tratamento de conexao para apresentar outra tela....
                     if(!Save.havesInternet()){
                         while (!Save.havesInternet()) {
                             Save.Network(getApplicationContext());
@@ -283,11 +271,11 @@ public class MainActivity extends AppCompatActivity {
                     int qtdProd = tela.getProdutos().size();
 
                     if(tela.getTipoMidia().equals("imagem")){
+                        VideoView vv = (VideoView) findViewById(R.id.videoView);
+                        vv.setVisibility(View.INVISIBLE);
                         Drawable img = tela.getImagem();
                         ImageView animation = (ImageView) findViewById(R.id.animation);
                         animation.setBackground(img);
-                    }else{
-                        decodificador(String.valueOf(tela.getImagem()));
                     }
 
                     timer = tela.getTimer();
@@ -296,7 +284,10 @@ public class MainActivity extends AppCompatActivity {
 
                     //Se a midia for Video executar apenas este if...
                     if(tela.getTipoMidia().equals("video")){
+                        VideoView vv = (VideoView) findViewById(R.id.videoView);
+                        vv.setVisibility(View.VISIBLE);
                         playVideo();
+                        LimparTela();
                     }else {
 
                         if (tela.getQtdProdutos() >= 0) {
@@ -326,8 +317,9 @@ public class MainActivity extends AppCompatActivity {
                                 TextView textViewpeso = (TextView) findViewById(textpeso);
                                 textViewpeso.setTextColor(corProduto);
                                 String preco = tela.getProdutos().get(i).getPreco();
-                                preco = preco.replace('.', ',');
-                                textViewpeso.setText("R$ " + preco);
+                                preco = "R$ " + preco.replace('.', ',');
+
+                                textViewpeso.setText(preco);
                             }
 
                             for (int i = qtdProd; i < 17; i++) {
@@ -369,8 +361,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void LimparTela(){
-        FrameLayout fundo = (FrameLayout) findViewById(R.id.fundo);
-        fundo.setBackground(getResources().getDrawable(R.drawable.teste));
 
         for (int i = 1; i <= 17; i++) {
 
@@ -393,51 +383,68 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView animation = (ImageView) findViewById(R.id.animation);
         animation.setBackground(null);
+        ConnectionTela CLP = new ConnectionTela();
+        try {
 
-        int descri = getResources().getIdentifier("descricao"+(8), "id",getPackageName());
-        TextView textViewdesc = (TextView) findViewById(descri);
-        String descricao = "Não há internet, preços desatualizados";
-        textViewdesc.setText(descricao);
-        textViewdesc.setTextColor(Color.parseColor("#FFFFFFFF"));
+            Tela tela = (Tela) CLP.execute(loja, departamento, jTime + 1, getApplicationContext()).get();
+
+
+            if(tela.getTipoMidia().equals("video")) {
+                int descri = getResources().getIdentifier("descricao" + (8), "id", getPackageName());
+                TextView textViewdesc = (TextView) findViewById(descri);
+                String descricao = "";
+                textViewdesc.setText(descricao);
+
+            }else{
+                int descri = getResources().getIdentifier("descricao" + (8), "id", getPackageName());
+                TextView textViewdesc = (TextView) findViewById(descri);
+                String descricao = "Não há internet, preços desatualizados";
+                textViewdesc.setText(descricao);
+                textViewdesc.setTextColor(Color.parseColor("#FFFFFFFF"));
+
+                FrameLayout fundo = (FrameLayout) findViewById(R.id.fundo);
+                fundo.setBackground(getResources().getDrawable(R.drawable.teste));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
    public void  playVideo(){
 
         try {
-            String url = Environment.getExternalStorageDirectory() + "/my/Convert.mp4"  ;//"android.resource://" + getPackageName() + "/" + R.raw.teste; // your URL here
-
-            MediaController mc = new MediaController(this);
+            String url = "http://192.168.0.221:70/MIPP/teste.mp4"; //Environment.getExternalStorageDirectory() + "/Convert.mp4"  ;//"android.resource://" + getPackageName() + "/" + R.raw.teste; // your URL here
+           // MediaController mc = new MediaController(this);
             VideoView vv = (VideoView) findViewById(R.id.videoView);
             vv.setVisibility(View.VISIBLE);
-            vv.setMediaController(mc);
+            //vv.setMediaController(mc);
             vv.setVideoPath(url);
             vv.requestFocus();
             vv.start();
-            mc.show();
+            //mc.show();
         }catch (Exception e){
             e.printStackTrace();
         }
 
     }
 
-    public String decodificador(String data){
-
-        byte[] video = Base64.decode(data , Base64.DEFAULT);
-        try {
-
-            FileOutputStream out = new FileOutputStream(
-                    Environment.getExternalStorageDirectory()
-                            + "/my/Convert.mp4");
-            out.write(video);
-            out.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e("Error", e.toString());
-
-        }
-        return null;
-    }
+//    public void decodificador(String data){
+//
+//        byte[] video = Base64.decode(data , Base64.DEFAULT);
+//
+//        try {
+//
+//            FileOutputStream out = new FileOutputStream(Environment.getExternalStorageDirectory()+ "/Convert.mp4");
+//                    ///mnt/sdcard/Movies
+//            out.write(video);
+//            out.close();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            Log.e("Error", e.toString());
+//
+//        }
+//
+//    }
 
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
@@ -445,13 +452,6 @@ public class MainActivity extends AppCompatActivity {
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
-    /**
-     * Checks if the app has permission to write to device storage
-     *
-     * If the app does not has permission then the user will be prompted to grant permissions
-     *
-     * @param activity
-     */
     public static void verifyStoragePermissions(Activity activity) {
         // Check if we have write permission
         int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);

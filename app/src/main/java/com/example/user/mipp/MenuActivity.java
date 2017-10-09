@@ -10,11 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import com.example.user.mipp.Conexao.ConnectionIDs;
 import com.example.user.mipp.Conexao.ConnectionUnidades;
 import com.example.user.mipp.Modelo.UnDepto;
-
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -43,9 +41,6 @@ public class MenuActivity extends AppCompatActivity {
 
             startActivity(goToMIPP);
         }
-
-
-
 
         final Spinner spUn = (Spinner) findViewById(R.id.spinnerUnidade);
         final Spinner spDp = (Spinner) findViewById(R.id.spinnerDepto);
@@ -149,5 +144,8 @@ public class MenuActivity extends AppCompatActivity {
         });
     }
 
-
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }
