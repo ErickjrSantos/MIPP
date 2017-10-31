@@ -3,6 +3,8 @@ package com.example.user.mipp;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -10,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.Process;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -35,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
      * {@link #timer} milliseconds.
      */
 
+    ProgressDialog dialog;
+
     private static int loja;
     private static int departamento;
     int jTime = 0;
@@ -45,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
      * Some older devices needs a small delay between UI widget updates
      * and a change of the status and navigation bar.
      */
-    private static final int UI_ANIMATION_DELAY = 300;
+    private static final int UI_ANIMATION_DELAY = 200;
     private final Handler mHideHandler = new Handler();
     private View mContentView;
     private final Runnable mHidePart2Runnable = new Runnable() {
@@ -117,9 +122,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
-
         TextView txtSetor = (TextView) findViewById(R.id.nomeSetor);
 
         switch (departamento){
@@ -156,7 +158,6 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
         Save.Network(getApplicationContext());
         if(!Save.havesInternet()){
             LimparTela();
@@ -178,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
         // Trigger the initial hide() shortly after the activity has been
         // created, to briefly hint to the user that UI controls
         // are available.
-        delayedHide(100);
+        delayedHide(1000);
     }
 
     private void toggle() {
@@ -230,13 +231,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void carregaProdutos() {
-
-
-        new CountDownTimer(timer, 2) {
-
+        new CountDownTimer(timer, 200) {
             public void onTick(long millisUntilFinished) {
-
-
                 if (!vTest) {
                     //havia apenas limpa tela...mas este comando tambem coloca um fundo para referencia
                     LimparTela();
@@ -249,6 +245,7 @@ public class MainActivity extends AppCompatActivity {
                     if(!Save.havesInternet()){
                         while (!Save.havesInternet()) {
                             Save.Network(getApplicationContext());
+                            LimparTela();
                         }
                         jTime = 0;
                     }
@@ -381,36 +378,40 @@ public class MainActivity extends AppCompatActivity {
             vTest=true;
         }
 
-        ImageView animation = (ImageView) findViewById(R.id.animation);
-        animation.setBackground(null);
-        ConnectionTela CLP = new ConnectionTela();
+            ImageView animation = (ImageView) findViewById(R.id.animation);
+            animation.setBackground(null);
+            ConnectionTela CLP = new ConnectionTela();
+
         try {
+                if(Save.havesInternet()) {
+                    Tela tela = (Tela) CLP.execute(loja, departamento, jTime + 1, getApplicationContext()).get();
 
-            Tela tela = (Tela) CLP.execute(loja, departamento, jTime + 1, getApplicationContext()).get();
+                    if (tela.getTipoMidia().equals("video")) {
+                        int descri = getResources().getIdentifier("descricao" + (8), "id", getPackageName());
+                        TextView textViewdesc = (TextView) findViewById(descri);
+                        String descricao = "";
+                        textViewdesc.setText(descricao);
 
+                    } else {
+                        int descri = getResources().getIdentifier("descricao" + (8), "id", getPackageName());
+                        TextView textViewdesc = (TextView) findViewById(descri);
+                        String descricao = "Redefinindo Produtos";
+                        textViewdesc.setText(descricao);
+                        textViewdesc.setTextColor(Color.parseColor("#FFFFFFFF"));
 
-            if(tela.getTipoMidia().equals("video")) {
-                int descri = getResources().getIdentifier("descricao" + (8), "id", getPackageName());
-                TextView textViewdesc = (TextView) findViewById(descri);
-                String descricao = "";
-                textViewdesc.setText(descricao);
+                        FrameLayout fundo = (FrameLayout) findViewById(R.id.fundo);
+                        fundo.setBackground(getResources().getDrawable(R.drawable.teste));
+                    }
+                }else{
+                    dialogTestConnection();
+                }
 
-            }else{
-                int descri = getResources().getIdentifier("descricao" + (8), "id", getPackageName());
-                TextView textViewdesc = (TextView) findViewById(descri);
-                String descricao = "Não há internet, preços desatualizados";
-                textViewdesc.setText(descricao);
-                textViewdesc.setTextColor(Color.parseColor("#FFFFFFFF"));
-
-                FrameLayout fundo = (FrameLayout) findViewById(R.id.fundo);
-                fundo.setBackground(getResources().getDrawable(R.drawable.teste));
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-   public void  playVideo(){
+    public void  playVideo(){
 
         try {
             String url = "http://192.168.0.221:70/MIPP/teste.mp4"; //Environment.getExternalStorageDirectory() + "/Convert.mp4"  ;//"android.resource://" + getPackageName() + "/" + R.raw.teste; // your URL here
@@ -427,24 +428,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
-//    public void decodificador(String data){
-//
-//        byte[] video = Base64.decode(data , Base64.DEFAULT);
-//
-//        try {
-//
-//            FileOutputStream out = new FileOutputStream(Environment.getExternalStorageDirectory()+ "/Convert.mp4");
-//                    ///mnt/sdcard/Movies
-//            out.write(video);
-//            out.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            Log.e("Error", e.toString());
-//
-//        }
-//
-//    }
 
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
@@ -465,4 +448,29 @@ public class MainActivity extends AppCompatActivity {
             );
         }
     }
+
+    public void dialogTestConnection(){
+
+        dialog = new ProgressDialog(MainActivity.this);
+        dialog.setTitle("Verificando Rede... ");
+        dialog.setMessage("Procurando produtos !");
+        dialog.show();
+        dialog.setCancelable(false);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    if (!Save.havesInternet()) {
+                        Thread.sleep(10000);
+                    }
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                dialog.dismiss();
+            }
+        }).start();
+
+    }
+
 }

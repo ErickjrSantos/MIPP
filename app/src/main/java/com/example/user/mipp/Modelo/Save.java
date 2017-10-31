@@ -67,7 +67,6 @@ public class Save {
 
     public static HttpURLConnection TestConnection(Context context, String url){
         Network(context);
-
         HttpURLConnection con;
         try {
             URL obj = new URL(url);

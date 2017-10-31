@@ -24,12 +24,14 @@ public class ConnectionTela extends AsyncTask{
         Context context = (Context) params[3];
         Tela t;
 
+
         try {
 
             HttpURLConnection con = Save.TestConnection(context, url, urlParameters);
             if(con == null){
                 url = "http://187.35.128.157:70/MIPP/getTela.php";
                 con = Save.TestConnection(context, url, urlParameters);
+
             }
 
             StringBuilder response = new StringBuilder();
@@ -58,6 +60,7 @@ public class ConnectionTela extends AsyncTask{
 
             t = new Tela(codT, timer,tipoMidia, imagem, corNormal, corPromo);
 
+
             JSONArray JArrayProduto = jsonObjt.getJSONArray("produtos");
             for(int i = 0; i < quantProdutos; i++){
                 String codP = JArrayProduto.getJSONObject(i).getString("codigo");
@@ -68,11 +71,14 @@ public class ConnectionTela extends AsyncTask{
                 Produto p = new Produto(codP, desc, preco, promocao);
 
                 t.addProduto(p);
+
             }
+            return t;
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+
         }
-        return t;
+
+        return null;
     }
 }
