@@ -4,7 +4,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -12,7 +11,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.os.Process;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -21,7 +19,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.VideoView;
-
 import com.example.user.mipp.Conexao.ConnectionQtdTelas;
 import com.example.user.mipp.Conexao.ConnectionTela;
 import com.example.user.mipp.Modelo.Save;
@@ -38,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
      * {@link #timer} milliseconds.
      */
 
-    ProgressDialog dialog;
+
 
     private static int loja;
     private static int departamento;
@@ -50,20 +47,22 @@ public class MainActivity extends AppCompatActivity {
      * Some older devices needs a small delay between UI widget updates
      * and a change of the status and navigation bar.
      */
-    private static final int UI_ANIMATION_DELAY = 200;
+    private static final int UI_ANIMATION_DELAY = 600;
     private final Handler mHideHandler = new Handler();
     private View mContentView;
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
-        public void run() {
+        public void run(){
 
             mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
                     | View.SYSTEM_UI_FLAG_FULLSCREEN
                     | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                     | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                     | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+
+            );
         }
     };
 
@@ -179,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
         // Trigger the initial hide() shortly after the activity has been
         // created, to briefly hint to the user that UI controls
         // are available.
-        delayedHide(1000);
+        delayedHide(600);
     }
 
     private void toggle() {
@@ -216,6 +215,7 @@ public class MainActivity extends AppCompatActivity {
         mHideHandler.postDelayed(mShowPart2Runnable, UI_ANIMATION_DELAY);
     }
 
+
     /**
      * Schedules a call to hide() in [delay] milliseconds, canceling any
      * previously scheduled calls.
@@ -231,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void carregaProdutos() {
-        new CountDownTimer(timer, 200) {
+        new CountDownTimer(timer, 100) {
             public void onTick(long millisUntilFinished) {
                 if (!vTest) {
                     //havia apenas limpa tela...mas este comando tambem coloca um fundo para referencia
@@ -380,6 +380,7 @@ public class MainActivity extends AppCompatActivity {
 
             ImageView animation = (ImageView) findViewById(R.id.animation);
             animation.setBackground(null);
+            animation.requestFocus();
             ConnectionTela CLP = new ConnectionTela();
 
         try {
@@ -448,6 +449,7 @@ public class MainActivity extends AppCompatActivity {
             );
         }
     }
+    public ProgressDialog dialog;
 
     public void dialogTestConnection(){
 
@@ -468,6 +470,7 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 dialog.dismiss();
+                onStop();
             }
         }).start();
 

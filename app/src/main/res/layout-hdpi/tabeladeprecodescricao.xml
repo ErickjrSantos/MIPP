@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.example.user.mipp.MIPPTextView
+    <TextView
         android:id="@+id/descricao1"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/textViewHeight"
@@ -14,7 +14,7 @@
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
-    <com.example.user.mipp.MIPPTextView
+    <TextView
         android:id="@+id/descricao2"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/textViewHeight"
@@ -24,7 +24,7 @@
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
-    <com.example.user.mipp.MIPPTextView
+    <TextView
         android:id="@+id/descricao3"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/textViewHeight"
@@ -34,7 +34,7 @@
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
-    <com.example.user.mipp.MIPPTextView
+    <TextView
         android:id="@+id/descricao4"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/textViewHeight"

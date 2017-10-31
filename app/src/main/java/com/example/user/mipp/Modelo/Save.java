@@ -95,7 +95,7 @@ public class Save {
         try {
             URL obj = new URL(url);
             con = (HttpURLConnection) obj.openConnection();
-            con.setConnectTimeout(200);
+            con.setConnectTimeout(800);
             con.setRequestMethod("POST");
             con.setDoOutput(true);
 

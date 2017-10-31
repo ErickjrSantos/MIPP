@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
 
-    <com.example.user.mipp.MIPPTextView
+    <TextView
         android:id="@+id/codigo1"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/textViewHeight"
@@ -14,7 +14,7 @@
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
-    <com.example.user.mipp.MIPPTextView
+    <TextView
         android:id="@+id/codigo2"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/textViewHeight"
@@ -23,7 +23,7 @@
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
-    <com.example.user.mipp.MIPPTextView
+    <TextView
         android:id="@+id/codigo3"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/textViewHeight"
@@ -32,7 +32,7 @@
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
-    <com.example.user.mipp.MIPPTextView
+    <TextView
         android:id="@+id/codigo4"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/textViewHeight"
@@ -41,7 +41,7 @@
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
-    <com.example.user.mipp.MIPPTextView
+    <TextView
         android:id="@+id/codigo5"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/textViewHeight"
@@ -50,7 +50,7 @@
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
-    <com.example.user.mipp.MIPPTextView
+    <TextView
         android:id="@+id/codigo6"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/textViewHeight"
@@ -59,7 +59,7 @@
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
-    <com.example.user.mipp.MIPPTextView
+    <TextView
         android:id="@+id/codigo7"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/textViewHeight"
@@ -68,7 +68,7 @@
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
-    <com.example.user.mipp.MIPPTextView
+    <TextView
         android:id="@+id/codigo8"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/textViewHeight"
@@ -77,7 +77,7 @@
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
-    <com.example.user.mipp.MIPPTextView
+    <TextView
         android:id="@+id/codigo9"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/textViewHeight"
@@ -86,7 +86,7 @@
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
-    <com.example.user.mipp.MIPPTextView
+    <TextView
         android:id="@+id/codigo10"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/textViewHeight"
@@ -95,7 +95,7 @@
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
-    <com.example.user.mipp.MIPPTextView
+    <TextView
         android:id="@+id/codigo11"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/textViewHeight"
@@ -104,7 +104,7 @@
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
-    <com.example.user.mipp.MIPPTextView
+    <TextView
         android:id="@+id/codigo12"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/textViewHeight"
@@ -113,7 +113,7 @@
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
-    <com.example.user.mipp.MIPPTextView
+    <TextView
         android:id="@+id/codigo13"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/textViewHeight"
@@ -122,7 +122,7 @@
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
-    <com.example.user.mipp.MIPPTextView
+    <TextView
         android:id="@+id/codigo14"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/textViewHeight"
@@ -131,7 +131,7 @@
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
-    <com.example.user.mipp.MIPPTextView
+    <TextView
         android:id="@+id/codigo15"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/textViewHeight"
@@ -140,7 +140,7 @@
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
-    <com.example.user.mipp.MIPPTextView
+    <TextView
         android:id="@+id/codigo16"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/textViewHeight"
@@ -149,7 +149,7 @@
         android:textSize="@dimen/descricao_all"
         android:textStyle="bold" />
 
-    <com.example.user.mipp.MIPPTextView
+    <TextView
         android:id="@+id/codigo17"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/textViewHeight"
